@@ -11,31 +11,5 @@
 </head>
 <body>
     <div class="container text-center">
-        <nav class="navbar navbar-expand-lg bg-light mb-2">
-            <div class="container-fluid">
-                <a class="navbar-brand" id="blog" name="blog" type="submit" href="topic.php">БлогерЮА</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="<?php if ($_SESSION['user_role']==='admin') echo "admin.php"; else echo "topic.php"; ?> "><?php if ($_SESSION['user_role']==='admin') echo "Адміністрування"; else echo "Додому";?></a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="login.php">Увійти</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="new_topic_route.php">Написати</a>
-                        </li>
-                    </ul>
-
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Пошук статті" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Пошук</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
+        header
+    </div>
