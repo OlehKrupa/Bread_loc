@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema bread.loc
+-- Schema bread
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema bread.loc
+-- Schema bread
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `bread.loc` DEFAULT CHARACTER SET utf8 ;
-USE `bread.loc` ;
+CREATE SCHEMA IF NOT EXISTS `bread` DEFAULT CHARACTER SET utf8 ;
+USE `bread` ;
 
 -- -----------------------------------------------------
--- Table `bread.loc`.`Warehouse`
+-- Table `bread`.`Warehouse`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bread.loc`.`Warehouse` (
+CREATE TABLE IF NOT EXISTS `bread`.`Warehouse` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `address` VARCHAR(100) NOT NULL,
@@ -31,9 +31,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bread.loc`.`Crop`
+-- Table `bread`.`Crop`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bread.loc`.`Crop` (
+CREATE TABLE IF NOT EXISTS `bread`.`Crop` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Warehouse_id` INT NOT NULL,
   `name` VARCHAR(50) NOT NULL,
@@ -47,16 +47,16 @@ CREATE TABLE IF NOT EXISTS `bread.loc`.`Crop` (
   INDEX `fk_Crop_Warehouse1_idx` (`Warehouse_id` ASC) VISIBLE,
   CONSTRAINT `fk_Crop_Warehouse1`
     FOREIGN KEY (`Warehouse_id`)
-    REFERENCES `bread.loc`.`Warehouse` (`id`)
+    REFERENCES `bread`.`Warehouse` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bread.loc`.`Standard`
+-- Table `bread`.`Standard`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bread.loc`.`Standard` (
+CREATE TABLE IF NOT EXISTS `bread`.`Standard` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Crop_id` INT NOT NULL,
   `min_moisture` FLOAT NOT NULL,
@@ -69,16 +69,16 @@ CREATE TABLE IF NOT EXISTS `bread.loc`.`Standard` (
   INDEX `fk_Standard_Crop1_idx` (`Crop_id` ASC) VISIBLE,
   CONSTRAINT `fk_Standard_Crop1`
     FOREIGN KEY (`Crop_id`)
-    REFERENCES `bread.loc`.`Crop` (`id`)
+    REFERENCES `bread`.`Crop` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bread.loc`.`Supplier`
+-- Table `bread`.`Supplier`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bread.loc`.`Supplier` (
+CREATE TABLE IF NOT EXISTS `bread`.`Supplier` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `number` VARCHAR(16) NOT NULL,
@@ -88,9 +88,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bread.loc`.`Consignment_IN`
+-- Table `bread`.`Consignment_IN`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bread.loc`.`Consignment_IN` (
+CREATE TABLE IF NOT EXISTS `bread`.`Consignment_IN` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Supplier_id` INT NOT NULL,
   `date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -99,16 +99,16 @@ CREATE TABLE IF NOT EXISTS `bread.loc`.`Consignment_IN` (
   INDEX `fk_Supply_Supplier_idx` (`Supplier_id` ASC) VISIBLE,
   CONSTRAINT `fk_Supply_Supplier`
     FOREIGN KEY (`Supplier_id`)
-    REFERENCES `bread.loc`.`Supplier` (`id`)
+    REFERENCES `bread`.`Supplier` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bread.loc`.`Consignment_OUT`
+-- Table `bread`.`Consignment_OUT`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bread.loc`.`Consignment_OUT` (
+CREATE TABLE IF NOT EXISTS `bread`.`Consignment_OUT` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Crop_id` INT NOT NULL,
   `amount` DECIMAL NOT NULL,
@@ -121,16 +121,16 @@ CREATE TABLE IF NOT EXISTS `bread.loc`.`Consignment_OUT` (
   INDEX `fk_Consignment_OUT_Crop1_idx` (`Crop_id` ASC) VISIBLE,
   CONSTRAINT `fk_Consignment_OUT_Crop1`
     FOREIGN KEY (`Crop_id`)
-    REFERENCES `bread.loc`.`Crop` (`id`)
+    REFERENCES `bread`.`Crop` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bread.loc`.`Consignment_data`
+-- Table `bread`.`Consignment_data`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bread.loc`.`Consignment_data` (
+CREATE TABLE IF NOT EXISTS `bread`.`Consignment_data` (
   `Consignment_IN_id` INT NOT NULL,
   `Crop_id` INT NOT NULL,
   `amount` DECIMAL NOT NULL,
@@ -140,12 +140,12 @@ CREATE TABLE IF NOT EXISTS `bread.loc`.`Consignment_data` (
   INDEX `fk_Consignment_IN_has_Crop_Consignment_IN1_idx` (`Consignment_IN_id` ASC) VISIBLE,
   CONSTRAINT `fk_Consignment_IN_has_Crop_Consignment_IN1`
     FOREIGN KEY (`Consignment_IN_id`)
-    REFERENCES `bread.loc`.`Consignment_IN` (`id`)
+    REFERENCES `bread`.`Consignment_IN` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Consignment_IN_has_Crop_Crop1`
     FOREIGN KEY (`Crop_id`)
-    REFERENCES `bread.loc`.`Crop` (`id`)
+    REFERENCES `bread`.`Crop` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
