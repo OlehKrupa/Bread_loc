@@ -33,7 +33,7 @@ if (array_key_exists($sort, $sort_list)){
 	$sort_sql=reset($sort_list);
 }
 
-$result = $dbConnect->query("select `Crop`.`name` AS `name`,`Crop`.`variety` AS `variety`,`Crop`.`grade` AS `grade`,`Crop`.`amount` AS `amount`,`Crop`.`moisture` AS `moisture`,`Crop`.`temperature` AS `temperature`,`Warehouse`.`name` AS `warehouse`,`Warehouse`.`address` AS `address` from (`Crop` join `Warehouse` on((`Crop`.`Warehouse_id` = `Warehouse`.`id`)))");
+$result = $dbConnect->query("select `Crop`.`name` AS `name`,`Crop`.`variety` AS `variety`,`Crop`.`grade` AS `grade`,`Crop`.`amount` AS `amount`,`Crop`.`moisture` AS `moisture`,`Crop`.`temperature` AS `temperature`,`Warehouse`.`name` AS `warehouse`,`Warehouse`.`address` AS `address` from (`Crop` join `Warehouse` on((`Crop`.`Warehouse_id` = `Warehouse`.`id`))) order by {$sort_sql}");
 $list = $result->fetchAll(PDO::FETCH_ASSOC);
 
 function sort_link_th($title, $a, $b) {
