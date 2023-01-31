@@ -7,22 +7,30 @@
           <div class="card-body p-5 text-center">
 
             <h3 class="mb-5">Увійти в систему</h3>
+            <form action="login.php" method="post">
 
-            <div class="form-outline mb-4">
-              <input type="email" id="user" class="form-control form-control-lg" />
-              <label class="form-label" for="user">Користувач</label>
-            </div>
+              <div class="form-outline mb-4">
+                <input type="text" id="user" class="form-control form-control-lg <?php if(!empty($error['user'])) echo 'is-invalid' ?>" />
+                <label class="form-label" for="user">Користувач</label>
+                <div class="invalid-feedback">
+                  <?php echo $error['user'] ?? '';?>;
+                </div>
+              </div>
 
-            <div class="form-outline mb-4">
-              <input type="password" id="password" class="form-control form-control-lg" />
-              <label class="form-label" for="password">Пароль</label>
-            </div>
+              <div class="form-outline mb-4">
+                <input type="password" id="password" class="form-control form-control-lg <?php if(!empty($error['password'])) echo 'is-invalid' ?>" />
+                <label class="form-label" for="password">Пароль</label>
+                <div class="invalid-feedback">
+                  <?php echo $error['password'] ?? '';?>;
+                </div>
+              </div>
 
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Увійти</button>
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Увійти</button>
 
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<?php include TEMPLATES_PATH."partials".DIRECTORY_SEPARATOR."footer.php";?>
+  </section>
+  <?php include TEMPLATES_PATH."partials".DIRECTORY_SEPARATOR."footer.php";?>
