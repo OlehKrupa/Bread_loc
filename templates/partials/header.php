@@ -21,7 +21,27 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
             <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" href="tables.php">Таблиці</a>
+              <a class="nav-link active" aria-current="page" href="">Зберігання</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link active" aria-current="page" href="">Стандарти</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link active" aria-current="page" href="">Склади</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link active" aria-current="page" href="">Поставки</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link active" aria-current="page" href="">Постачальники</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link active" aria-current="page" href="">Відправка</a>
             </li>
 
             <li class="nav-item dropdown">
