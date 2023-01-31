@@ -16,7 +16,7 @@
 		</thead>
 		<tbody>
 			<?php foreach ($list as $row): ?>
-				<tr class="<?php if ($row['grade'] === "Задовільно") echo "table-warning"; elseif ($row['grade'] === "Добре") echo "table-info"; ?>">
+				<tr class="<?php if($row['grade'] === "Відмінно") echo "table-success"; elseif ($row['grade'] === "Задовільно") echo "table-secondary"; elseif ($row['grade'] === "Добре") echo "table-warning"; elseif ($row['grade'] === "Погано") echo "table-danger"; else echo "table-dark"; ?>">
 					<td><?php echo $row['name']; ?></td>
 					<td><?php echo $row['variety']; ?></td>
 					<td><?php echo $row['grade']; ?></td>
