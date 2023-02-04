@@ -19,25 +19,25 @@
         <div class="collapse navbar-collapse" id="navbarsExample07">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" id="Crop" href="table_selector.php">Зберігання</a>
+              <a class="nav-link active" aria-current="page" id="Crop" href="crop.php">Зберігання</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" id="Standard" href="table_selector.php">Стандарти</a>
+              <a class="nav-link active" aria-current="page" id="Standard" href="">Стандарти</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" id="Warehouse" href="table_selector.php">Склади</a>
+              <a class="nav-link active" aria-current="page" id="Warehouse" href="">Склади</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" id="Consignments" href="table_selector.php">Поставки</a>
+              <a class="nav-link active" aria-current="page" id="Consignments" href="">Поставки</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" id="Consignment_OUT" href="table_selector.php">Відправка</a>
+              <a class="nav-link active" aria-current="page" id="Consignment_OUT" href="">Відправка</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" id="Supplier" href="table_selector.php">Постачальники</a>
+              <a class="nav-link active" aria-current="page" id="Supplier" href="">Постачальники</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" id="Reports" href="table_selector.php">Звіти</a>
+              <a class="nav-link active" aria-current="page" id="Reports" href="">Звіти</a>
             </li>
           </ul>
         </div>
