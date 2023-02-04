@@ -3,7 +3,7 @@ session_start();
  
 define("ROOT_PATH", dirname(__FILE__));
 define("TEMPLATES_PATH", dirname(__FILE__).DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR);
-define("TABLES_PATH", dirname(__FILE__).DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR."tables".DIRECTORY_SEPARATOR);
+define("TABLES_PATH", dirname(__FILE__).DIRECTORY_SEPARATOR."tables".DIRECTORY_SEPARATOR);
 
 define("DB_NAME","bread");
 define("DB_USER","grain_administrator");
