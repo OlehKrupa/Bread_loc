@@ -1,6 +1,6 @@
 <?php
 //?
-require_once dirname(__FILE__).DIRECTORY_SEPARATOR."config.php";
+require_once 'config.php';
 
 $sort_list = array(
 	'id_asc'=>'`id`',
@@ -42,6 +42,5 @@ function sort_link_th($title, $a, $b) {
 		return '<a href="?sort=' . $a . '">' . $title . '</a>';  
 	}
 }
-
 require_once TEMPLATES_PATH."crop.php";
 ?>
