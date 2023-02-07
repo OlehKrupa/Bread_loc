@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="navbarsExample07">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" id="Crop" href="/tables/crop.php">Зберігання</a>
+              <a class="nav-link active" aria-current="page" id="Crop" href="crop.php">Зберігання</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link active" aria-current="page" id="Standard" href="">Стандарти</a>
