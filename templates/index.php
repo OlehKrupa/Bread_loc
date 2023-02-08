@@ -5,9 +5,9 @@
 	
 	<div class="col-10">
 		<div class="container-lg row g-0">
-			<div class="col"><button type="button" class="btn btn-primary m-2">*Списати*</button></div>
-			<div class="col"><button type="button" class="btn btn-primary m-2">*Сушити*</button></div>
-			<div class="col"><button type="button" class="btn btn-primary m-2">*Продати*</button></div>
+			<div class="col"><button type="button" class="btn btn-danger m-2" type="submit" id="write off" name="write off" >*Списати*</button></div>
+			<div class="col"><button type="button" class="btn btn-info m-2" type="submit" id="dry" name="dry" >*Сушити*</button></div>
+			<div class="col"><button type="button" class="btn btn-warning m-2" type="submit" id="sell" name="sell" >*Продати*</button></div>
 		</div>
 
 		<table class="table table-striped">
