@@ -11,7 +11,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
     <div class="container">
-      <a class="navbar-brand" href="index.php">ЕлеваторЮА</a>
+      <a class="navbar-brand" href="../index.php">ЕлеваторЮА</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -19,25 +19,22 @@
         <div class="collapse navbar-collapse" id="navbarsExample07">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" id="Crop" href="crop.php">Зберігання</a>
+              <a class="nav-link active" aria-current="page" id="Crop" href="/tables/crop.php">Зберігання</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" id="Standard" href="">Стандарти</a>
+              <a class="nav-link active" aria-current="page" id="Standard" href="/tables/standard.php">Стандарти</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" id="Warehouse" href="">Склади</a>
+              <a class="nav-link active" aria-current="page" id="Warehouse" href="/tables/warehouse.php">Склади</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" id="Consignments" href="">Поставки</a>
+              <a class="nav-link active" aria-current="page" id="Consignment_OUT" href="/tables/consignment.php">Відправка</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" id="Consignment_OUT" href="">Відправка</a>
+              <a class="nav-link active" aria-current="page" id="Supplier" href="/tables/supplier.php">Постачальники</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" id="Supplier" href="">Постачальники</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link active" aria-current="page" id="Reports" href="">Звіти</a>
+              <a class="nav-link active" aria-current="page" id="Reports" href="../report.php">Звіти</a>
             </li>
           </ul>
         </div>
