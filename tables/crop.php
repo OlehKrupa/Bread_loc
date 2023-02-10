@@ -1,6 +1,26 @@
 <?php
 require_once '../config.php';
 
+if (isset($_POST['add'])){
+}
+
+if (isset($_POST['clear'])){
+}
+
+if (isset($_POST['approve'])){
+}
+
+if (isset($_POST['write_off'])){
+	require_once '../grade.php';
+}
+
+if (isset($_POST['dry'])){
+	require_once '../dry.php';
+}
+
+if (isset($_POST['sell'])){
+}
+
 $sort_list = array(
 	'id_asc'=>'`id`',
 	'id_desc'=>'`id` DESC',
@@ -59,22 +79,6 @@ $warehouse = $result->fetchAll(PDO::FETCH_ASSOC);
 
 $result = $dbConnect->query("SELECT * FROM `Standard`");
 $standart = $result->fetchAll(PDO::FETCH_ASSOC);
-
-if (isset($_POST['approve'])){
-	echo "approve";
-}
-
-if (isset($_POST['write_off'])){
-	echo "write_off";
-}
-
-if (isset($_POST['dry'])){
-	echo "dry";
-}
-
-if (isset($_POST['sell'])){
-	echo "sell";
-}
 
 
 require_once TEMPLATES_PATH."crop.php";
