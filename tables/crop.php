@@ -1,17 +1,50 @@
 <?php
 require_once '../config.php';
 
+$chose_id=$_SESSION['chose_id'];
+
+$fields=['supplier_select','warehouse_select','standard_select','amount','name','variety','moisture','garbage','minerals','nature'];
+
+$supplier_ui=$_POST['supplier_select'];
+$warehouse_ui=$_POST['warehouse_select'];
+$standard_ui=$_POST['standard_select'];
+$amount_ui=$_POST['amount'];
+$name_ui=$_POST['name'];
+$variety_ui=$_POST['variety'];
+$moisture_ui=$_POST['moisture'];
+$garbage_ui=$_POST['garbage'];
+$minerals_ui=$_POST['minerals'];
+$nature_ui=$_POST['nature'];
+
 if (isset($_POST['add'])){
+
+}
+
+if (isset($_POST['refresh'])){
+	require_once '../grade.php';
 }
 
 if (isset($_POST['clear'])){
+$chose_id=0;
+$supplier_ui="";
+$warehouse_ui="";
+$standard_ui="";
+$amount_ui="";
+$name_ui="";
+$variety_ui="";
+$moisture_ui="";
+$garbage_ui="";
+$minerals_ui="";
+$nature_ui="";
 }
 
 if (isset($_POST['approve'])){
+
 }
 
 if (isset($_POST['write_off'])){
-	require_once '../grade.php';
+	$delete = $dbConnect->prepare("DELETE from Crop where id = :id");
+	$delete->execute(["id"=>$chose_id]);
 }
 
 if (isset($_POST['dry'])){
@@ -19,6 +52,8 @@ if (isset($_POST['dry'])){
 }
 
 if (isset($_POST['sell'])){
+	require_once 'consignment.php';
+	die();
 }
 
 $sort_list = array(
