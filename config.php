@@ -1,6 +1,9 @@
 <?php
 session_start();
 date_default_timezone_set('UTC');
+
+//!!!
+$_SESSION['chose_id']=7;
  
 define("ROOT_PATH", dirname(__FILE__));
 define("TEMPLATES_PATH", dirname(__FILE__).DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR);
