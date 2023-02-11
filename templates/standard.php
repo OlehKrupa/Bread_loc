@@ -1,7 +1,6 @@
 <?php include TEMPLATES_PATH."partials".DIRECTORY_SEPARATOR."header.php";?>
-
 <div class="container-lg">
-	<h1>Ну типа тут отчеты</h1>
+	<h1>Стандарти</h1>
 </div>
 
 <?php include TEMPLATES_PATH."partials".DIRECTORY_SEPARATOR."footer.php";?>
