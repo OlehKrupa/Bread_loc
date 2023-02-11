@@ -17,7 +17,9 @@ foreach ($list as $value) {
 			$final_grade++;
 		}
 	}
-	
+
+	echo $final_grade."\t";
+	/*
 	$garbage_ranges = [ $value['min_garbage'], ((3*$value['min_garbage']+$value['max_garbage'])/4), (($value['min_garbage']+$value['max_garbage'])/2), (($value['min_garbage']+$value['max_garbage']*3)/4), $value['max_garbage']];
 	foreach($garbage_ranges as $v){
 		if ($value['garbage']<$v){
@@ -64,6 +66,7 @@ foreach ($list as $value) {
 	}
 
 	$stmt->execute(["new_grade"=>$grade,"id"=>$value['id']]);
+	*/
 }
 
 ?>
