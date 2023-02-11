@@ -1,8 +1,24 @@
 <?php 
 require_once "config.php";
 
+$chose_id=$_SESSION['chose_id'];
+
 if (empty($_SESSION['user'])){
 	header("location: /login.php");
+	die();
+}
+
+if (isset($_POST['write_off'])){
+	$delete = $dbConnect->prepare("DELETE from Crop where id = :id");
+	$delete->execute(["id"=>$chose_id]);
+}
+
+if (isset($_POST['dry'])){
+	require_once 'dry.php';
+}
+
+if (isset($_POST['sell'])){
+	header("location: /tables/consignment.php");
 	die();
 }
 
