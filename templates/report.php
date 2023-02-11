@@ -19,12 +19,9 @@
 		</div>
 
 		<div class="col-2">
-			<br>Стовп повідомлень типу
-			<br>Зерно 1!
-			<br>Зерно 2 псується!
-			<br>Зерно 3 зіпсувалось!
-			<br>Зерно 4 закінчується!
-			<br>Так, такий же стовп як на індексі
+			<?php require_once "alert_cell.php"; foreach ($alert as $k => $v):?>
+				<h4><?php echo($v); ?></h4>
+			<?php endforeach; ?> 
 		</div>
 	</div>
 </div>
