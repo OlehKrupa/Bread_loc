@@ -23,7 +23,7 @@ if (!empty($_POST)){
 	if (empty($error)){
 		$_SESSION['user']=htmlspecialchars($_POST['user']);
 		$_SESSION['logined']=1;
-		require_once '../grade.php';
+		
 		header("location: /index.php");
 		die();
 	}
