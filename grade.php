@@ -1,12 +1,10 @@
 <?php
-require_once '../config.php';
-
 $grade_ranges = [0=>"Зіпсовано",5=>"Погано",10=>"Задовільно",15=>"Добре",20=>"Відмінно"];
 $grade="Задовільно";
 
 $result=$dbConnect->query("select `Crop`.`id` AS `id`,`Crop`.`moisture` AS `moisture`,`Standard`.`min_moisture` AS `min_moisture`,`Standard`.`max_moisture` AS `max_moisture`,`Crop`.`garbage` AS `garbage`,`Standard`.`min_garbage` AS `min_garbage`,`Standard`.`max_garbage` AS `max_garbage`,`Crop`.`minerals` AS `minerals`,`Standard`.`min_minerals` AS `min_minerals`,`Standard`.`max_minerals` AS `max_minerals`,`Crop`.`nature` AS `nature`,`Standard`.`min_nature` AS `min_nature`,`Standard`.`max_nature` AS `max_nature`,`Crop`.`date` AS `date`,`Standard`.`minor_risk` AS `minor_risk`,`Standard`.`major_risk` AS `major_risk`,`Crop`.`grade` AS `grade` from (`Crop` join `Standard` on((`Crop`.`Standard_id` = `Standard`.`id`))) order by `Crop`.`id`");
 
-$list = $result->fetchAll(PDO::FETCH_NAMED);
+$list = $result->fetchAll(PDO::FETCH_ASSOC);
 
 $stmt = $dbConnect->prepare("UPDATE `Crop` set `grade` = :new_grade where `id`= :id");
 
