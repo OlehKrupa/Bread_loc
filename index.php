@@ -18,6 +18,7 @@ if (isset($_POST['dry'])){
 }
 
 if (isset($_POST['sell'])){
+	$_SESSION['sell_id']=$chose_id;
 	header("location: /tables/consignment.php");
 	die();
 }
