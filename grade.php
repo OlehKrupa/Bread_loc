@@ -51,13 +51,13 @@ foreach ($list as $value) {
 		}
 	}
 
-	if ($final_grade>=20){
+	if ($final_grade>20){
 		$grade=$grade_ranges[20];
-	}elseif ($final_grade>=15){
+	}elseif ($final_grade>15){
 		$grade=$grade_ranges[15];
-	}elseif ($final_grade>=10){
+	}elseif ($final_grade>10){
 		$grade=$grade_ranges[10];
-	}elseif ($final_grade>=5){
+	}elseif ($final_grade>5){
 		$grade=$grade_ranges[5];
 	}else{
 		$grade=$grade_ranges[0];
