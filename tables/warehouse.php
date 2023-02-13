@@ -64,10 +64,7 @@
 		require_once TEMPLATES_PATH."warehouse.php";
 	}
 
-	if (empty($chose_id)){
-		//add
-	}else{
-		//update
+	if (!empty($chose_id)){
 		foreach ($list as $key => $value) {
 			if ($value['id']===$chose_id){
 				$name_ui=$value['name'];
