@@ -32,7 +32,7 @@
 		<script src="../JS/index.js"></script>
 		<thead>
 			<tr class="table-info">
-				<th><?php echo sort_link_th('Айді','id_asc','id_desc'); ?></th>
+				<th><?php echo sort_link_th('Код','id_asc','id_desc'); ?></th>
 				<th><?php echo sort_link_th('Назва','name_asc','name_desc'); ?></th>
 				<th><?php echo sort_link_th('Номер телефону','number_asc','number_desc'); ?></th>
 			</tr>

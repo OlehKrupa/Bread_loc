@@ -1,7 +1,7 @@
 <?php include TEMPLATES_PATH."partials".DIRECTORY_SEPARATOR."header.php";?>
 <div class="container-lg">
 	<form action="/tables/standard.php" method="post">
-		
+		<h1>Стандарти зберігання зерно-бобової продукції</h1>
 		<div class="container-lg text-center row g-0">
 			<div class="col-4 px-2">
 				<div class="input-group m-2">
@@ -124,7 +124,7 @@
 		<script src="../JS/index.js"></script>
 		<thead>
 			<tr class="table-info">
-				<th><?php echo sort_link_th('Айді','id_asc','id_desc'); ?></th>
+				<th><?php echo sort_link_th('Код','id_asc','id_desc'); ?></th>
 				<th><?php echo sort_link_th('Назва','name_asc','name_desc'); ?></th>
 				<th><?php echo sort_link_th('Мін ризики','minor_risk_asc','minor_risk_desc'); ?></th>
 				<th><?php echo sort_link_th('Макс ризики','major_risk_asc','major_risk_desc'); ?></th>

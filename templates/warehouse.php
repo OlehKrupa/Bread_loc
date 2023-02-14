@@ -38,7 +38,7 @@
 		<script src="../JS/index.js"></script>
 		<thead>
 			<tr class="table-info">
-				<th><?php echo sort_link_th('Айді','id_asc','id_desc'); ?></th>
+				<th><?php echo sort_link_th('Код','id_asc','id_desc'); ?></th>
 				<th><?php echo sort_link_th('Назва','name_asc','name_desc'); ?></th>
 				<th><?php echo sort_link_th('Адреса','address_asc','address_desc'); ?></th>
 				<th><?php echo sort_link_th('Ємність','capacity_asc','capacity_desc'); ?></th>

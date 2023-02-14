@@ -101,7 +101,7 @@
 		<script src="../JS/index.js"></script>
 		<thead>
 			<tr class="table-info">
-				<th><?php echo sort_link_th('Айді','id_asc','id_desc'); ?></th>
+				<th><?php echo sort_link_th('Код','id_asc','id_desc'); ?></th>
 				<th><?php echo sort_link_th('Постачальник','supplier_name_asc','supplier_name_desc'); ?></th>
 				<th><?php echo sort_link_th('Дата','date_asc','date_desc'); ?></th>
 				<th><?php echo sort_link_th('Склад','warehouse_name_asc','warehouse_name_desc'); ?></th>
