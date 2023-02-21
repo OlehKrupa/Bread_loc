@@ -1,4 +1,9 @@
 <?php include TEMPLATES_PATH."partials".DIRECTORY_SEPARATOR."header.php";?>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet">
+
 <div class="container-lg">
 	<form action="/tables/warehouse.php" method="post">
 		<h1>Складські приміщення та елеватори</h1>
@@ -34,14 +39,13 @@
 
 	</form>
 
-	<table class="table">
-		<script src="../JS/index.js"></script>
+	<table id="table" class="table">
 		<thead>
 			<tr class="table-info">
-				<th><?php echo sort_link_th('Код','id_asc','id_desc'); ?></th>
-				<th><?php echo sort_link_th('Назва','name_asc','name_desc'); ?></th>
-				<th><?php echo sort_link_th('Адреса','address_asc','address_desc'); ?></th>
-				<th><?php echo sort_link_th('Ємність','capacity_asc','capacity_desc'); ?></th>
+				<th>Код</th>
+				<th>Назва</th>
+				<th>Адреса</th>
+				<th>Ємність</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -55,6 +59,26 @@
 			<?php endforeach; ?> 
 		</tbody>
 	</table>
+
+	<script>
+		$(document).ready( function () {
+			var table = $('#table').DataTable({
+				scrollY: '450px',
+				scrollCollapse: true,
+				paging: false,
+				search: {
+					return: true,
+				},
+			});
+			$('#table tbody').on('click', 'tr', function () {
+				var data = table.row(this).data();
+				alert('You clicked on ' + data[0] + "'s row");
+        //тут хреначить аякс запрос на перекид
+			});
+
+		} );
+	</script>
+
 </div>
 
 <?php include TEMPLATES_PATH."partials".DIRECTORY_SEPARATOR."footer.php";?>

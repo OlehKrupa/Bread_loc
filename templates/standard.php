@@ -1,4 +1,9 @@
 <?php include TEMPLATES_PATH."partials".DIRECTORY_SEPARATOR."header.php";?>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet">
+
 <div class="container-lg">
 	<form action="/tables/standard.php" method="post">
 		<h1>Стандарти зберігання зерно-бобової продукції</h1>
@@ -117,27 +122,26 @@
 
 	</form>
 
-	<table class="table">
-		<script src="../JS/index.js"></script>
+	<table id="table" class="table">
 		<thead>
 			<tr class="table-info">
-				<th><?php echo sort_link_th('Код','id_asc','id_desc'); ?></th>
-				<th><?php echo sort_link_th('Назва','name_asc','name_desc'); ?></th>
-				<th><?php echo sort_link_th('Мін ризики','minor_risk_asc','minor_risk_desc'); ?></th>
-				<th><?php echo sort_link_th('Макс ризики','major_risk_asc','major_risk_desc'); ?></th>
-				<th><?php echo sort_link_th('Мін вологість','min_moisture_asc','min_moisture_desc'); ?></th>
-				<th><?php echo sort_link_th('Макс вологість','max_moisture_asc','max_moisture_desc'); ?></th>
-				<th><?php echo sort_link_th('Мін сміття','min_garbage_asc','min_garbage_desc'); ?></th>
-				<th><?php echo sort_link_th('Макс сміття','max_garbage_asc','max_garbage_desc'); ?></th>
-				<th><?php echo sort_link_th('Мін PO₄','min_minerals_asc','min_minerals_desc'); ?></th>
-				<th><?php echo sort_link_th('Макс PO₄','max_minerals_asc','max_minerals_desc'); ?></th>
-				<th><?php echo sort_link_th('Мін г/л','min_nature_asc','min_nature_desc'); ?></th>
-				<th><?php echo sort_link_th('Макс г/л','min_nature_asc','min_nature_desc'); ?></th>
+				<th>Код</th>
+				<th>Назва</th>
+				<th>Мін ризики</th>
+				<th>Макс ризики</th>
+				<th>Мін вологість</th>
+				<th>Макс вологість</th>
+				<th>Мін сміття</th>
+				<th>Макс сміття</th>
+				<th>Мін PO₄</th>
+				<th>Макс PO₄</th>
+				<th>Мін натура</th>
+				<th>Макс натура</th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php foreach ($list as $row): ?>
-				<tr class="table-secondary" onclick="get_element_by_click(<?php echo $row['id']; ?>)" > 
+				<tr class="table-primary" onclick="get_element_by_click(<?php echo $row['id']; ?>)" > 
 					<td><?php echo $row['id']; ?></td>
 					<td><?php echo $row['name']; ?></td>
 					<td><?php echo $row['minor_risk']; ?></td>
@@ -154,6 +158,29 @@
 			<?php endforeach; ?> 
 		</tbody>
 	</table>
+
+	<script>
+		$(document).ready( function () {
+			var table = $('#table').DataTable({
+				scrollY: '450px',
+				scrollCollapse: true,
+				paging: false,
+				search: {
+					return: true,
+				},
+
+
+			});
+
+			$('#table tbody').on('click', 'tr', function () {
+				var data = table.row(this).data();
+				alert('You clicked on ' + data[0] + "'s row");
+        //тут хреначить аякс запрос на перекид
+			});
+
+		} );
+	</script>
+
 </div>
 
 <?php include TEMPLATES_PATH."partials".DIRECTORY_SEPARATOR."footer.php";?>
