@@ -5,36 +5,7 @@ $sell_id = $_SESSION['sell_id'];
 //обрано на сторінці
 $chose_id=$_SESSION['chose_id'];
 
-$sort_list = array(
-	'id_asc'=>'`id`',
-	'id_desc'=>'`id` DESC',
-	'crop_name_asc'=>'`crop_name`',
-	'crop_name_desc'=>'`crop_name` DESC',
-	'amount'=>'`amount`',
-	'amount_desc'=>'`amount` DESC',
-	'date_asc'=>'`date`',
-	'date_desc'=>'`date` DESC',
-	'name_asc'=>'`name`',
-	'name_desc'=>'`name` DESC',
-	'number_asc'=>'`number`',
-	'number_desc'=>'`number` DESC',
-	'moisture_asc'=>'`moisture`',
-	'moisture_desc'=>'`moisture` DESC',
-	'garbage_asc'=>'`garbage`',
-	'garbage_desc'=>'`garbage` DESC',
-	'minerals_asc'=>'`minerals`',
-	'minerals_desc'=>'`minerals` DESC',
-	'nature_asc'=>'`nature`',
-	'nature_desc'=>'`nature` DESC',
-);
-$sort = @$_GET['sort'];
-if (array_key_exists($sort, $sort_list)){
-	$sort_sql = $sort_list[$sort];
-} else {
-	$sort_sql=reset($sort_list);
-}
-
-$result = $dbConnect->query("select `Consignment_OUT`.`id` AS `id`,`Consignment_OUT`.`Crop_id` AS `Crop_id`,`Crop`.`name` AS `crop_name`,`Consignment_OUT`.`amount` AS `amount`,`Consignment_OUT`.`date` AS `date`,`Consignment_OUT`.`name` AS `name`,`Consignment_OUT`.`number` AS `number`,`Consignment_OUT`.`moisture` AS `moisture`,`Consignment_OUT`.`garbage` AS `garbage`,`Consignment_OUT`.`minerals` AS `minerals`,`Consignment_OUT`.`nature` AS `nature` from (`Consignment_OUT` join `Crop` on((`Consignment_OUT`.`Crop_id` = `Crop`.`id`))) order by {$sort_sql}");
+$result = $dbConnect->query("select `Consignment_OUT`.`id` AS `id`,`Consignment_OUT`.`Crop_id` AS `Crop_id`,`Crop`.`name` AS `crop_name`,`Consignment_OUT`.`amount` AS `amount`,`Consignment_OUT`.`date` AS `date`,`Consignment_OUT`.`name` AS `name`,`Consignment_OUT`.`number` AS `number`,`Consignment_OUT`.`moisture` AS `moisture`,`Consignment_OUT`.`garbage` AS `garbage`,`Consignment_OUT`.`minerals` AS `minerals`,`Consignment_OUT`.`nature` AS `nature` from (`Consignment_OUT` join `Crop` on((`Consignment_OUT`.`Crop_id` = `Crop`.`id`)))");
 
 $list = $result->fetchAll(PDO::FETCH_ASSOC);
 
@@ -140,17 +111,6 @@ if (isset($_POST['clear'])){
 if (isset($_POST['delete'])){
 	$delete = $dbConnect->prepare("DELETE from Consignment_OUT where id = :id");
 	$delete->execute(["id"=>$chose_id]);
-}
-
-function sort_link_th($title, $a, $b) {
-	$sort = @$_GET['sort'];
-	if ($sort == $a) {
-		return '<a class="active" href="?sort=' . $b . '">' . $title . ' <i></i></a>';
-	} elseif ($sort == $b) {
-		return '<a class="active" href="?sort=' . $a . '">' . $title . ' <i></i></a>';  
-	} else {
-		return '<a href="?sort=' . $a . '">' . $title . '</a>';  
-	}
 }
 
 require_once TEMPLATES_PATH."consignment.php";

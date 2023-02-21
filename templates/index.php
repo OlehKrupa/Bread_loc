@@ -18,17 +18,19 @@
 			<table id="table" class="table">
 				<thead>
 					<tr class="table-info">
-						<th><?php echo sort_link_th('Культура','name_asc','name_desc'); ?></th>
-						<th><?php echo sort_link_th('Сорт','variety_asc','variety_desc'); ?></th>
-						<th><?php echo sort_link_th('Стан','grade_asc','grade_desc'); ?></th>
-						<th><?php echo sort_link_th('Стандарт','standard_name_asc','standard_name_desc'); ?></th>
-						<th><?php echo sort_link_th('Склад','warehouse_name_asc','warehouse_name_desc'); ?></th>
-						<th><?php echo sort_link_th('Кількість','amount_asc','amount_desc'); ?></th>
+						<th>Код</th>
+						<th>Культура</th>
+						<th>Сорт</th>
+						<th>Стан</th>
+						<th>Стандарт</th>
+						<th>Склад</th>
+						<th>Кількість</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php foreach ($list as $row): ?>
 						<tr class="<?php if($row['grade'] === "Відмінно") echo "table-success"; elseif ($row['grade'] === "Задовільно") echo "table-secondary"; elseif ($row['grade'] === "Добре") echo "table-warning"; elseif ($row['grade'] === "Погано") echo "table-danger"; else echo "table-dark"; ?>">
+							<td><?php echo $row['id']; ?></td>
 							<td><?php echo $row['name']; ?></td>
 							<td><?php echo $row['variety']; ?></td>
 							<td><?php echo $row['grade']; ?></td>
@@ -46,9 +48,12 @@
 						scrollY: '450px',
 						scrollCollapse: true,
 						paging: false,
-						search: {
-							return: true,
+						columnDefs: [
+						{
+							target: 0,
+							visible: false,
 						},
+						],
 					});
 					$('#table tbody').on('click', 'tr', function () {
 						var data = table.row(this).data();

@@ -113,9 +113,6 @@
 				scrollY: '450px',
 				scrollCollapse: true,
 				paging: false,
-				search: {
-					return: true,
-				},
 			});
 			$('#table tbody').on('click', 'tr', function () {
 				var data = table.row(this).data();

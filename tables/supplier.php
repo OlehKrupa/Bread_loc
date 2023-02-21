@@ -3,22 +3,7 @@
 //!!!
 	$chose_id=$_SESSION['chose_id'];
 
-	$sort_list = array(
-		'id_asc'=>'`id`',
-		'id_desc'=>'`id` DESC',
-		'name_asc'=>'`name`',
-		'name_desc'=>'`name` DESC',
-		'number_asc'=>'`number`',
-		'number_desc'=>'`number` DESC',
-	);
-	$sort = @$_GET['sort'];
-	if (array_key_exists($sort, $sort_list)){
-		$sort_sql = $sort_list[$sort];
-	} else {
-		$sort_sql=reset($sort_list);
-	}
-
-	$result = $dbConnect->query("select * from Supplier order by {$sort_sql}");
+	$result = $dbConnect->query("select * from Supplier");
 	$list = $result->fetchAll(PDO::FETCH_ASSOC);
 
 	$fields=["name","number"];
@@ -82,15 +67,5 @@
 		$delete->execute(["id"=>$chose_id]);
 	}
 
-	function sort_link_th($title, $a, $b) {
-		$sort = @$_GET['sort'];
-		if ($sort == $a) {
-			return '<a class="active" href="?sort=' . $b . '">' . $title . ' <i></i></a>';
-		} elseif ($sort == $b) {
-			return '<a class="active" href="?sort=' . $a . '">' . $title . ' <i></i></a>';  
-		} else {
-			return '<a href="?sort=' . $a . '">' . $title . '</a>';  
-		}
-	}
 	require_once TEMPLATES_PATH."supplier.php";
 ?>

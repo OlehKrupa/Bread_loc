@@ -3,40 +3,7 @@ require_once '../config.php';
 
 $chose_id=$_SESSION['chose_id'];
 
-$sort_list = array(
-	'id_asc'=>'`id`',
-	'id_desc'=>'`id` DESC',
-	'name_asc'=>'`name`',
-	'name_desc'=>'`name` DESC',
-	'minor_risk_asc'=>'`minor_risk`',
-	'minor_risk_desc'=>'`minor_risk` DESC',
-	'major_risk_asc'=>'`major_risk`',
-	'major_risk_desc'=>'`major_risk` DESC',
-	'min_moisture_asc'=>'`min_moisture`',
-	'min_moisture_desc'=>'`min_moisture` DESC',
-	'max_moisture_asc'=>'`max_moisture`',
-	'max_moisture_desc'=>'`max_moisture` DESC',
-	'min_garbage_asc'=>'`min_garbage`',
-	'min_garbage_desc'=>'`min_garbage` DESC',
-	'max_garbage_asc'=>'`max_garbage`',
-	'max_garbage_desc'=>'`max_garbage` DESC',
-	'min_minerals_asc'=>'`min_minerals`',
-	'min_minerals_desc'=>'`min_minerals` DESC',
-	'max_minerals_asc'=>'`max_minerals`',
-	'max_minerals_desc'=>'`max_minerals` DESC',
-	'min_nature_asc'=>'`min_nature`',
-	'min_nature_desc'=>'`min_nature` DESC',
-	'max_nature_asc'=>'`max_nature`',
-	'max_nature_desc'=>'`max_nature` DESC',
-);
-$sort = @$_GET['sort'];
-if (array_key_exists($sort, $sort_list)){
-	$sort_sql = $sort_list[$sort];
-} else {
-	$sort_sql=reset($sort_list);
-}
-
-$result = $dbConnect->query("select * from Standard order by {$sort_sql}");
+$result = $dbConnect->query("select * from Standard");
 $list = $result->fetchAll(PDO::FETCH_ASSOC);
 
 $fields=["name","number","minor","major","min_moisture","max_moisture","min_garbage","max_garbage","min_minerals","max_minerals","min_nature","max_nature"];
@@ -155,17 +122,6 @@ if (isset($_POST['delete'])){
 	$delete = $dbConnect->prepare("DELETE from Standard where id = :id");
 	$delete->execute(["id"=>$chose_id]);
 	*/
-}
-
-function sort_link_th($title, $a, $b) {
-	$sort = @$_GET['sort'];
-	if ($sort == $a) {
-		return '<a class="active" href="?sort=' . $b . '">' . $title . ' <i></i></a>';
-	} elseif ($sort == $b) {
-		return '<a class="active" href="?sort=' . $a . '">' . $title . ' <i></i></a>';  
-	} else {
-		return '<a href="?sort=' . $a . '">' . $title . '</a>';  
-	}
 }
 
 require_once TEMPLATES_PATH."standard.php";
