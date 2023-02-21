@@ -1,5 +1,6 @@
 <?php include TEMPLATES_PATH."partials".DIRECTORY_SEPARATOR."header.php";?>
 <div class="container-lg text-center">
+	<h1>Звітність</h1>
 	<div class="row">
 		<div class="col-10">
 			<div class="container-lg row g-0">

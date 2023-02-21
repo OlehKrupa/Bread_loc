@@ -1,61 +1,61 @@
 <?php include TEMPLATES_PATH."partials".DIRECTORY_SEPARATOR."header.php";?>
 <div class="container-lg">
 	<form action="/tables/consignment.php" method="post">
-		
+		<h1>Відправні накладні</h1>
 		<div class="container-lg text-center row g-0">
 			<div class="col px-2">
 				<div class="input-group m-2">
 					<span class="input-group-text" id="crop_select">Зерно</span>
 					<div class="invalid-feedback"><?php echo $error['crop_select'] ?? '';?></div>
-					<input type="text" class="form-control <?php if(!empty($error['crop_select'])) echo 'is-invalid' ?>" placeholder="" name="crop_select" aria-describedby="crop_select" value="<?php echo $crop_ui ?>">
+					<input type="text" class="form-control <?php if(!empty($error['crop_select'])) echo 'is-invalid' ?>" placeholder="" name="crop_select" aria-describedby="crop_select" value="<?php if(!empty($crop_ui)){ echo $crop_ui;} ?>">
 				</div>
 
 				<div class="input-group m-2">
 					<span class="input-group-text" id="amount">Кількість</span>
 					<div class="invalid-feedback"><?php echo $error['amount'] ?? '';?></div>
-					<input type="text" class="form-control <?php if(!empty($error['amount'])) echo 'is-invalid' ?>" placeholder="" name="amount" aria-describedby="amount" value="<?php echo $amount_ui ?>">
+					<input type="text" class="form-control <?php if(!empty($error['amount'])) echo 'is-invalid' ?>" placeholder="" name="amount" aria-describedby="amount" value="<?php if (!empty($amount_ui)){echo $amount_ui;} ?>">
 				</div>
 
 				<div class="input-group m-2">
 					<span class="input-group-text" id="date">Дата</span>
 					<div class="invalid-feedback"><?php echo $error['date'] ?? '';?></div>
-					<input type="text" class="form-control <?php if(!empty($error['date'])) echo 'is-invalid' ?>" placeholder="" name="date" aria-describedby="date" value="<?php echo $date_ui ?>">
+					<input type="text" class="form-control <?php if(!empty($error['date'])) echo 'is-invalid' ?>" placeholder="" name="date" aria-describedby="date" value="<?php if(!empty($date_ui)){echo $date_ui;} ?>">
 				</div>
 
 				<div class="input-group m-2">
 					<span class="input-group-text" id="name">Назва</span>
 					<div class="invalid-feedback"><?php echo $error['name'] ?? '';?></div>
-					<input type="text" class="form-control <?php if(!empty($error['name'])) echo 'is-invalid' ?>" placeholder="" name="name" aria-describedby="name" value="<?php echo $name_ui ?>">
+					<input type="text" class="form-control <?php if(!empty($error['name'])) echo 'is-invalid' ?>" placeholder="" name="name" aria-describedby="name" value="<?php if(!empty($name_ui)){echo $name_ui;} ?>">
 				</div>
 				
 				<div class="input-group m-2">
 					<span class="input-group-text" id="number">Телефон</span>
 					<div class="invalid-feedback"><?php echo $error['number'] ?? '';?></div>
-					<input type="text" class="form-control <?php if(!empty($error['number'])) echo 'is-invalid' ?>" placeholder="" name="number" aria-describedby="number" value="<?php echo $number_ui ?>">
+					<input type="text" class="form-control <?php if(!empty($error['number'])) echo 'is-invalid' ?>" placeholder="" name="number" aria-describedby="number" value="<?php if(!empty($number_ui)){echo $number_ui;} ?>">
 				</div>
 
 				<div class="input-group m-2">
 					<span class="input-group-text" id="moisture">Вологість</span>
 					<div class="invalid-feedback"><?php echo $error['moisture'] ?? '';?></div>
-					<input type="text" class="form-control <?php if(!empty($error['moisture'])) echo 'is-invalid' ?>" placeholder="" name="moisture" aria-describedby="moisture" value="<?php echo $moisture_ui ?>">
+					<input type="text" class="form-control <?php if(!empty($error['moisture'])) echo 'is-invalid' ?>" placeholder="" name="moisture" aria-describedby="moisture" value="<?php if(!empty($moisture_ui)){echo $moisture_ui;} ?>">
 				</div>
 
 				<div class="input-group m-2">
 					<span class="input-group-text" id="garbage">Сміття</span>
 					<div class="invalid-feedback"><?php echo $error['garbage'] ?? '';?></div>
-					<input type="text" class="form-control <?php if(!empty($error['garbage'])) echo 'is-invalid' ?>" placeholder="" name="garbage" aria-describedby="garbage" value="<?php echo $garbage_ui ?>">
+					<input type="text" class="form-control <?php if(!empty($error['garbage'])) echo 'is-invalid' ?>" placeholder="" name="garbage" aria-describedby="garbage" value="<?php if(!empty($garbage_ui)){echo $garbage_ui;} ?>">
 				</div>
 
 				<div class="input-group m-2">
 					<span class="input-group-text" id="minerals">PO₄</span>
 					<div class="invalid-feedback"><?php echo $error['minerals'] ?? '';?></div>
-					<input type="text" class="form-control <?php if(!empty($error['minerals'])) echo 'is-invalid' ?>" placeholder="" name="minerals" aria-describedby="minerals" value="<?php echo $minerals_ui ?>">
+					<input type="text" class="form-control <?php if(!empty($error['minerals'])) echo 'is-invalid' ?>" placeholder="" name="minerals" aria-describedby="minerals" value="<?php if(!empty($minerals_ui)){echo $minerals_ui;} ?>">
 				</div>
 
 				<div class="input-group m-2">
 					<span class="input-group-text" id="nature">г/л</span>
 					<div class="invalid-feedback"><?php echo $error['nature'] ?? '';?></div>
-					<input type="text" class="form-control <?php if(!empty($error['nature'])) echo 'is-invalid' ?>" placeholder="" name="nature" aria-describedby="nature" value="<?php echo $nature_ui ?>">
+					<input type="text" class="form-control <?php if(!empty($error['nature'])) echo 'is-invalid' ?>" placeholder="" name="nature" aria-describedby="nature" value="<?php if(!empty($nature_ui)){echo $nature_ui;} ?>">
 				</div>
 			</div>
 
@@ -73,7 +73,7 @@
 		<script src="../JS/index.js"></script>
 		<thead>
 			<tr class="table-info">
-				<th><?php echo sort_link_th('Айді','id_asc','id_desc'); ?></th>
+				<th><?php echo sort_link_th('Код','id_asc','id_desc'); ?></th>
 				<th><?php echo sort_link_th('Зерно','crop_name_asc','crop_name_desc'); ?></th>
 				<th><?php echo sort_link_th('Кількість','amount_asc','amount_desc'); ?></th>
 				<th><?php echo sort_link_th('Дата','date_asc','date_desc'); ?></th>

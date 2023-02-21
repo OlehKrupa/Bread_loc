@@ -1,9 +1,10 @@
 <?php include TEMPLATES_PATH."partials".DIRECTORY_SEPARATOR."header.php";?>
-<div class="container-lg text-center">
+<div class="container-lg">
 	<div class="row">
 		<div class="col-10">
 			<form action="index.php" method="post">
-				<div class="container-lg row g-0">
+				<h1>Стан зберігання</h1>
+				<div class="container-lg row g-0 text-center">
 					<div class="col"><button class="btn btn-danger m-2" type="submit" id="write_off" name="write_off" >Списати</button></div>
 					<div class="col"><button class="btn btn-info m-2" type="submit" id="dry" name="dry" >Сушити</button></div>
 					<div class="col"><button class="btn btn-warning m-2" type="submit" id="sell" name="sell" >Продати</button></div>

@@ -2,7 +2,7 @@
 
 <div class="container-lg">
 	<form action="/tables/supplier.php" method="post">
-		
+		<h1>Постачальники</h1>
 		<div class="container-lg text-center row g-0">
 			<div class="col mx-2">
 				<div class="input-group m-2">

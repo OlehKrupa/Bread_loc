@@ -1,7 +1,12 @@
 <?php
 require_once '../config.php';
 
-$chose_id=$_SESSION['chose_id'];
+$chose_id="";
+
+if (isset($_POST['chose_id'])){
+	$chose_id=$_POST['chose_id'];
+	echo $chose_id;
+}
 
 if (isset($_POST['refresh'])){
 	require_once '../grade.php';
@@ -35,6 +40,7 @@ $sort_list = array(
 	'nature_asc'=>'`nature`',
 	'nature_desc'=>'`nature` DESC',
 );
+
 $sort = @$_GET['sort'];
 if (array_key_exists($sort, $sort_list)){
 	$sort_sql = $sort_list[$sort];
@@ -49,7 +55,6 @@ $fields=['supplier_select','warehouse_select','standard_select','amount','name',
 
 if (isset($_POST['ok'])){
 	if (!empty($_POST)){
-
 		$supplier_ui=$_POST['supplier_select'];
 		$warehouse_ui=$_POST['warehouse_select'];
 		$standard_ui=$_POST['standard_select'];

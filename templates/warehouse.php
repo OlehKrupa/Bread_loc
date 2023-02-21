@@ -1,7 +1,7 @@
 <?php include TEMPLATES_PATH."partials".DIRECTORY_SEPARATOR."header.php";?>
 <div class="container-lg">
 	<form action="/tables/warehouse.php" method="post">
-		
+		<h1>Складські приміщення та елеватори</h1>
 		<div class="container-lg text-center row g-0">
 			<div class="col mx-2">
 				<div class="input-group m-2">
@@ -21,7 +21,7 @@
 				<div class="input-group m-2">
 					<span class="input-group-text" id="capacity">Ємність</span>
 					<div class="invalid-feedback"><?php echo $error['capacity'] ?? '';?></div>
-					<input type="text" class="form-control <?php if(!empty($error['capacity'])) echo 'is-invalid' ?>" placeholder="" name="capacity" aria-describedby="capacity" value="<?php echo $capacity_ui ?>">
+					<input type="text" class="form-control <?php if(!empty($error['capacity'])) echo 'is-invalid' ?>" placeholder="" name="capacity" aria-describedby="capacity" value="<?php if (!empty($capacity_ui)){echo $capacity_ui;} ?>">
 				</div>
 			</div>
 		</div>

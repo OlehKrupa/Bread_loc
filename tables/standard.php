@@ -151,6 +151,7 @@ if (isset($_POST['clear'])){
 
 if (isset($_POST['delete'])){
 	/*
+	//проверка на его не использование надо!!!
 	$delete = $dbConnect->prepare("DELETE from Standard where id = :id");
 	$delete->execute(["id"=>$chose_id]);
 	*/
