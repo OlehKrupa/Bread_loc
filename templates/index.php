@@ -29,7 +29,7 @@
 				</thead>
 				<tbody>
 					<?php foreach ($list as $row): ?>
-						<tr class="<?php if($row['grade'] === "Відмінно") echo "table-success"; elseif ($row['grade'] === "Задовільно") echo "table-secondary"; elseif ($row['grade'] === "Добре") echo "table-warning"; elseif ($row['grade'] === "Погано") echo "table-danger"; else echo "table-dark"; ?>">
+						<tr class="<?php if($row['grade'] === "Відмінно") echo "table-success"; elseif ($row['grade'] === "Задовільно") echo "table-warning"; elseif ($row['grade'] === "Добре") echo "table-primary"; elseif ($row['grade'] === "Погано") echo "table-danger"; else echo "table-dark"; ?>">
 							<td><?php echo $row['id']; ?></td>
 							<td><?php echo $row['name']; ?></td>
 							<td><?php echo $row['variety']; ?></td>
@@ -43,25 +43,32 @@
 			</table>
 
 			<script>
-				$(document).ready( function () {
-					var table = $('#table').DataTable({
-						scrollY: '450px',
-						scrollCollapse: true,
-						paging: false,
-						columnDefs: [
-						{
-							target: 0,
-							visible: false,
-						},
-						],
-					});
-					$('#table tbody').on('click', 'tr', function () {
-						var data = table.row(this).data();
-						alert('You clicked on ' + data[0] + "'s row");
-        //тут хреначить аякс запрос на перекид
-					});
-				} );
-			</script>
+	$(document).ready( function () {
+		var table = $('#table').DataTable({
+			scrollY: '450px',
+			scrollCollapse: true,
+			paging: false,
+		});
+		$('#table tbody').on('click', 'tr', function () {
+			var data = table.row(this).data();
+			//айдишник
+			alert('Обрано зерно з кодом: ' + data[0]);
+
+			$.ajax({
+				type: "POST",
+				url: "index.php",
+				data: { index_chose_id: data[0]},
+				success: function(response) {
+					location.reload();
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+		});
+
+	} );
+</script>
 		</div>
 		<div class="col-2">
 			<?php require_once "alert_cell.php"; foreach ($alert as $k => $v):?>
