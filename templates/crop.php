@@ -121,7 +121,7 @@
 		</thead>
 		<tbody>
 			<?php foreach ($list as $row): ?>
-				<tr class="<?php if($row['grade'] === "Відмінно") echo "table-success"; elseif ($row['grade'] === "Задовільно") echo "table-secondary"; elseif ($row['grade'] === "Добре") echo "table-warning"; elseif ($row['grade'] === "Погано") echo "table-danger"; else echo "table-dark"; ?>" 
+				<tr class="<?php if($row['grade'] === "Відмінно") echo "table-success"; elseif ($row['grade'] === "Задовільно") echo "table-warning"; elseif ($row['grade'] === "Добре") echo "table-primary"; elseif ($row['grade'] === "Погано") echo "table-danger"; else echo "table-dark"; ?>" 
 
 					onclick="sendData(<?php echo $row['id']; ?>)" >
 
@@ -153,12 +153,12 @@
 		$('#table tbody').on('click', 'tr', function () {
 			var data = table.row(this).data();
 			//айдишник
-			//alert('You clicked on ' + data[0] + "'s row");
+			alert('Обрано зерно з кодом: ' + data[0]);
 
 			$.ajax({
 				type: "POST",
 				url: "/tables/crop.php",
-				data: { data: data[0]},
+				data: { crop_chose_id: data[0]},
 				success: function(response) {
 					location.reload();
 				},
