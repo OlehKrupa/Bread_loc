@@ -1,11 +1,13 @@
 <?php
 require_once '../config.php';
 
-if (isset($_POST['data'])){
-	$_SESSION['data']=$_POST['data'];
+if (isset($_POST['crop_chose_id'])){
+	$_SESSION['crop_chose_id']=$_POST['crop_chose_id'];
 }
 
-$chose_id=$_SESSION['data'];
+if (!empty($_SESSION['crop_chose_id'])){
+$chose_id=$_SESSION['crop_chose_id'];
+}
 
 if (isset($_POST['refresh'])){
 	require_once '../grade.php';
@@ -107,8 +109,7 @@ if (!empty($chose_id)){
 }
 
 if (isset($_POST['clear'])){
-		//Сделать реальную очистку chose_id
-	$_SESSION['data']=null;
+	$_SESSION['crop_chose_id']=null;
 	$supplier_ui="";
 	$warehouse_ui="";
 	$standard_ui="";
@@ -129,13 +130,14 @@ if (isset($_POST['write_off'])){
 }
 
 if (isset($_POST['dry'])){
+	$_SESSION['dry_id']=$chose_id;
 	require_once '../dry.php';
 	header("Refresh:0");
 }
 
 if (isset($_POST['sell'])){
 	$_SESSION['sell_id']=$chose_id;
-	require_once 'consignment.php';
+	header("location: /tables/consignment.php");
 	die();
 }
 
