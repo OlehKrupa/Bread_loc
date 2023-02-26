@@ -1,9 +1,18 @@
 <?php
 require_once '../config.php';
 //приходить з індекса чи кропа
-$sell_id = $_SESSION['sell_id'];
+if (!empty($_SESSION['sell_id'])){
+	$sell_id=$_SESSION['sell_id'];
+}
+
 //обрано на сторінці
-$chose_id=$_SESSION['chose_id'];
+if (isset($_POST['consignment_chose_id'])){
+	$_SESSION['consignment_chose_id']=$_POST['consignment_chose_id'];
+}
+
+if (!empty($_SESSION['consignment_chose_id'])){
+	$chose_id=$_SESSION['consignment_chose_id'];
+}
 
 $result = $dbConnect->query("select `Consignment_OUT`.`id` AS `id`,`Consignment_OUT`.`Crop_id` AS `Crop_id`,`Crop`.`name` AS `crop_name`,`Consignment_OUT`.`amount` AS `amount`,`Consignment_OUT`.`date` AS `date`,`Consignment_OUT`.`name` AS `name`,`Consignment_OUT`.`number` AS `number`,`Consignment_OUT`.`moisture` AS `moisture`,`Consignment_OUT`.`garbage` AS `garbage`,`Consignment_OUT`.`minerals` AS `minerals`,`Consignment_OUT`.`nature` AS `nature` from (`Consignment_OUT` join `Crop` on((`Consignment_OUT`.`Crop_id` = `Crop`.`id`)))");
 
@@ -75,12 +84,12 @@ if (isset($_POST['ok'])){
 			}
 		}
 	}
-	require_once TEMPLATES_PATH."consignment.php";
+	header("Refresh:0");
 }
 
 if (!empty($chose_id)){
 	foreach ($list as $key => $value) {
-		if ($value['id']===$chose_id){
+		if ($value['id']==$chose_id){
 			$crop_ui=$value['Crop_id'];
 			$amount_ui=$value['amount'];
 			$date_ui=$value['date'];
@@ -95,8 +104,8 @@ if (!empty($chose_id)){
 }
 
 if (isset($_POST['clear'])){
-	//Сделать реальную очистку chose_id
-	//$chose_id="";
+	$_SESSION['sell_id']="";
+	$_SESSION['consignment_chose_id']="";
 	$crop_ui="";
 	$amount_ui="";
 	$date_ui="";
@@ -106,11 +115,13 @@ if (isset($_POST['clear'])){
 	$garbage_ui="";
 	$minerals_ui="";
 	$nature_ui="";
+	header("Refresh:0");
 }
 
 if (isset($_POST['delete'])){
 	$delete = $dbConnect->prepare("DELETE from Consignment_OUT where id = :id");
 	$delete->execute(["id"=>$chose_id]);
+	header("Refresh:0");
 }
 
 require_once TEMPLATES_PATH."consignment.php";
