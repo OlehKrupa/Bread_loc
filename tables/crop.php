@@ -1,15 +1,15 @@
 <?php
 require_once '../config.php';
 
-$chose_id="";
-
-if (isset($_POST['chose_id'])){
-	$chose_id=$_POST['chose_id'];
-	echo $chose_id;
+if (isset($_POST['data'])){
+	$_SESSION['data']=$_POST['data'];
 }
+
+$chose_id=$_SESSION['data'];
 
 if (isset($_POST['refresh'])){
 	require_once '../grade.php';
+	header("Refresh:0");
 }
 
 $result = $dbConnect->query("select `Crop`.`id` AS `id`,`Supplier`.`name` AS `supplier_name`,`Crop`.`date` AS `date`,`Warehouse`.`name` AS `warehouse_name`,`Crop`.`amount` AS `amount`,`Standard`.`name` AS `standard_name`,`Crop`.`name` AS `name`,`Crop`.`variety` AS `variety`,`Crop`.`grade` AS `grade`,`Crop`.`moisture` AS `moisture`,`Crop`.`garbage` AS `garbage`,`Crop`.`minerals` AS `minerals`,`Crop`.`nature` AS `nature`, `Supplier_id`, `Warehouse_id`,`Standard_id` from (((`Crop` join `Warehouse` on((`Crop`.`Warehouse_id` = `Warehouse`.`id`))) join `Supplier` on((`Crop`.`Supplier_id` = `Supplier`.`id`))) join `Standard` on((`Crop`.`Standard_id` = `Standard`.`id`)))");
@@ -85,12 +85,13 @@ if (isset($_POST['ok'])){
 			}
 		}
 	}
-	require_once TEMPLATES_PATH."crop.php";
+	require_once '../grade.php';
+	header("Refresh:0");
 }
 
 if (!empty($chose_id)){
 	foreach ($list as $key => $value) {
-		if ($value['id']===$chose_id){
+		if ($value['id']==$chose_id){
 			$supplier_ui=$value['Supplier_id'];
 			$warehouse_ui=$value['Warehouse_id'];
 			$standard_ui=$value['Standard_id'];
@@ -107,7 +108,7 @@ if (!empty($chose_id)){
 
 if (isset($_POST['clear'])){
 		//Сделать реальную очистку chose_id
-	//$chose_id="";
+	$_SESSION['data']=null;
 	$supplier_ui="";
 	$warehouse_ui="";
 	$standard_ui="";
@@ -118,15 +119,18 @@ if (isset($_POST['clear'])){
 	$garbage_ui="";
 	$minerals_ui="";
 	$nature_ui="";
+	header("Refresh:0");
 }
 
 if (isset($_POST['write_off'])){
 	$delete = $dbConnect->prepare("DELETE from Crop where id = :id");
 	$delete->execute(["id"=>$chose_id]);
+	header("Refresh:0");
 }
 
 if (isset($_POST['dry'])){
 	require_once '../dry.php';
+	header("Refresh:0");
 }
 
 if (isset($_POST['sell'])){
