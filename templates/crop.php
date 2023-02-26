@@ -100,48 +100,49 @@
 
 </form>
 
-<table id="table" class="table">
-	<thead>
-		<tr class="table-info">
-			<th>Код</th>
-			<th>Постачальник</th>
-			<th>Дата</th>
-			<th>Склад</th>
-			<th>Кількість</th>
-			<th>Стандарт</th>
-			<th>Культура</th>
-			<th>Сорт</th>
-			<th>Стан</th>
-			<th>Вологість</th>
-			<th>Сміття</th>
-			<th>PO₄</th>
-			<th>Натура</th>
-		</tr>
-	</thead>
-	<tbody>
-		<?php foreach ($list as $row): ?>
-			<tr class="<?php if($row['grade'] === "Відмінно") echo "table-success"; elseif ($row['grade'] === "Задовільно") echo "table-secondary"; elseif ($row['grade'] === "Добре") echo "table-warning"; elseif ($row['grade'] === "Погано") echo "table-danger"; else echo "table-dark"; ?>" 
+<form action="/tables/crop.php" method="post">
+	<table id="table" class="table">
+		<thead>
+			<tr class="table-info">
+				<th>Код</th>
+				<th>Постачальник</th>
+				<th>Дата</th>
+				<th>Склад</th>
+				<th>Кількість</th>
+				<th>Стандарт</th>
+				<th>Культура</th>
+				<th>Сорт</th>
+				<th>Стан</th>
+				<th>Вологість</th>
+				<th>Сміття</th>
+				<th>PO₄</th>
+				<th>Натура</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($list as $row): ?>
+				<tr class="<?php if($row['grade'] === "Відмінно") echo "table-success"; elseif ($row['grade'] === "Задовільно") echo "table-secondary"; elseif ($row['grade'] === "Добре") echo "table-warning"; elseif ($row['grade'] === "Погано") echo "table-danger"; else echo "table-dark"; ?>" 
 
-				onclick="sendData(<?php echo $row['id']; ?>)" >
-				
-				<td><?php echo $row['id']; ?></td>
-				<td><?php echo $row['supplier_name']; ?></td>
-				<td><?php echo $row['date']; ?></td>
-				<td><?php echo $row['warehouse_name']; ?></td>
-				<td><?php echo $row['amount']; ?> тон</td>
-				<td><?php echo $row['standard_name']; ?></td>
-				<td><?php echo $row['name']; ?></td>
-				<td><?php echo $row['variety']; ?></td>
-				<td><?php echo $row['grade']; ?></td>
-				<td><?php echo $row['moisture']; ?></td>
-				<td><?php echo $row['garbage']; ?></td>
-				<td><?php echo $row['minerals']; ?></td>
-				<td><?php echo $row['nature']; ?></td>
-			</tr >
-		<?php endforeach; ?>    
-	</tbody>
-</table>
+					onclick="sendData(<?php echo $row['id']; ?>)" >
 
+					<td><?php echo $row['id']; ?></td>
+					<td><?php echo $row['supplier_name']; ?></td>
+					<td><?php echo $row['date']; ?></td>
+					<td><?php echo $row['warehouse_name']; ?></td>
+					<td><?php echo $row['amount']; ?> тон</td>
+					<td><?php echo $row['standard_name']; ?></td>
+					<td><?php echo $row['name']; ?></td>
+					<td><?php echo $row['variety']; ?></td>
+					<td><?php echo $row['grade']; ?></td>
+					<td><?php echo $row['moisture']; ?></td>
+					<td><?php echo $row['garbage']; ?></td>
+					<td><?php echo $row['minerals']; ?></td>
+					<td><?php echo $row['nature']; ?></td>
+				</tr >
+			<?php endforeach; ?>    
+		</tbody>
+	</table>
+</form>
 <script>
 	$(document).ready( function () {
 		var table = $('#table').DataTable({
@@ -151,8 +152,20 @@
 		});
 		$('#table tbody').on('click', 'tr', function () {
 			var data = table.row(this).data();
-			alert('You clicked on ' + data[0] + "'s row");
-        //тут хреначить аякс запрос на перекид
+			//айдишник
+			//alert('You clicked on ' + data[0] + "'s row");
+
+			$.ajax({
+				type: "POST",
+				url: "/tables/crop.php",
+				data: { data: data[0]},
+				success: function(response) {
+					location.reload();
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
 		});
 
 	} );
