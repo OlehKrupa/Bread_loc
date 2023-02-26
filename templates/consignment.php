@@ -108,20 +108,31 @@
 	</table>
 
 	<script>
-		$(document).ready( function () {
-			var table = $('#table').DataTable({
-				scrollY: '450px',
-				scrollCollapse: true,
-				paging: false,
-			});
-			$('#table tbody').on('click', 'tr', function () {
-				var data = table.row(this).data();
-				alert('You clicked on ' + data[0] + "'s row");
-        //тут хреначить аякс запрос на перекид
-			});
+	$(document).ready( function () {
+		var table = $('#table').DataTable({
+			scrollY: '450px',
+			scrollCollapse: true,
+			paging: false,
+		});
+		$('#table tbody').on('click', 'tr', function () {
+			var data = table.row(this).data();
+			alert('Обрано накладну з кодом: ' + data[0]);
 
-		} );
-	</script>
+			$.ajax({
+				type: "POST",
+				url: "/tables/consignment.php",
+				data: { consignment_chose_id: data[0]},
+				success: function(response) {
+					location.reload();
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+		});
+
+	} );
+</script>
 
 </div>
 
