@@ -1,7 +1,13 @@
 <?php
 require_once '../config.php';
 
-$chose_id=$_SESSION['chose_id'];
+if (isset($_POST['standard_chose_id'])){
+	$_SESSION['standard_chose_id']=$_POST['standard_chose_id'];
+}
+
+if (!empty($_SESSION['standard_chose_id'])){
+	$chose_id=$_SESSION['standard_chose_id'];
+}
 
 $result = $dbConnect->query("select * from Standard");
 $list = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -78,30 +84,29 @@ if (isset($_POST['ok'])){
 			}
 		}
 	}
-	require_once TEMPLATES_PATH."standard.php";
+	header("Refresh:0");
 }
 
 if (!empty($chose_id)){
 	foreach ($list as $key => $value) {
-		if ($value['id']===$chose_id){
+		if ($value['id']==$chose_id){
 			$name_ui=$value['name'];
-		$minor_ui=$value['minor_risk'];
-		$major_ui=$value['major_risk'];
-		$min_moisture_ui=$value['min_moisture'];
-		$max_moisture_ui=$value['max_moisture'];
-		$min_garbage_ui=$value['min_garbage'];
-		$max_garbage_ui=$value['max_garbage'];
-		$min_minerals_ui=$value['min_minerals'];
-		$max_minerals_ui=$value['max_minerals'];
-		$min_nature_ui=$value['min_nature'];
-		$max_nature_ui=$value['max_nature'];
+			$minor_ui=$value['minor_risk'];
+			$major_ui=$value['major_risk'];
+			$min_moisture_ui=$value['min_moisture'];
+			$max_moisture_ui=$value['max_moisture'];
+			$min_garbage_ui=$value['min_garbage'];
+			$max_garbage_ui=$value['max_garbage'];
+			$min_minerals_ui=$value['min_minerals'];
+			$max_minerals_ui=$value['max_minerals'];
+			$min_nature_ui=$value['min_nature'];
+			$max_nature_ui=$value['max_nature'];
 		}
 	}
 }
 
 if (isset($_POST['clear'])){
-	//Сделать реальную очистку chose_id
-	//$chose_id="";
+	$_SESSION['standard_chose_id']=null;
 	$name_ui="";
 	$minor_ui="";
 	$major_ui="";
@@ -113,15 +118,25 @@ if (isset($_POST['clear'])){
 	$max_minerals_ui="";
 	$min_nature_ui="";
 	$max_nature_ui="";
+	header("Refresh:0");
 }
 
 
 if (isset($_POST['delete'])){
-	/*
-	//проверка на его не использование надо!!!
-	$delete = $dbConnect->prepare("DELETE from Standard where id = :id");
-	$delete->execute(["id"=>$chose_id]);
-	*/
+	$result = $dbConnect->query("select `Crop`.`Standard_id` AS `Standard_id` from (`Crop` join `Standard` on((`Crop`.`Standard_id` = `Standard`.`id`))) GROUP BY `Standard_id`");
+	$list = $result->fetchAll(PDO::FETCH_ASSOC);
+
+	foreach($list as $k => $v){
+		if ($chose_id==$v['Standard_id']){
+			echo '<script>alert("Не можна видалити, в поточний момент використовуєтсья як стандарт зберігання")</script>';
+			break;
+		} else {
+			$delete = $dbConnect->prepare("DELETE from Standard where id = :id");
+			$delete->execute(["id"=>$chose_id]);
+		}
+	}
+
+	header("Refresh:0");
 }
 
 require_once TEMPLATES_PATH."standard.php";
