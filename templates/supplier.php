@@ -54,7 +54,7 @@
 	<script>
 	$(document).ready( function () {
 		var table = $('#table').DataTable({
-			scrollY: '450px',
+			scrollY: '500px',
 			scrollCollapse: true,
 			paging: false,
 		});

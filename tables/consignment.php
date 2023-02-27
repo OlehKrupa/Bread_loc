@@ -124,5 +124,11 @@ if (isset($_POST['delete'])){
 	header("Refresh:0");
 }
 
+$result = $dbConnect->query("select id,`name`,variety FROM `Crop`");
+$crops = $result->fetchAll(PDO::FETCH_ASSOC);
+
+$result = $dbConnect->query("select * FROM `Crop`");
+$crops_all = $result->fetchAll(PDO::FETCH_ASSOC);
+
 require_once TEMPLATES_PATH."consignment.php";
 ?>
