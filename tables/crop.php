@@ -14,7 +14,7 @@ if (isset($_POST['refresh'])){
 	header("Refresh:0");
 }
 
-$result = $dbConnect->query("select `Crop`.`id` AS `id`,`Supplier`.`name` AS `supplier_name`,`Crop`.`date` AS `date`,`Warehouse`.`name` AS `warehouse_name`,`Crop`.`amount` AS `amount`,`Standard`.`name` AS `standard_name`,`Crop`.`name` AS `name`,`Crop`.`variety` AS `variety`,`Crop`.`grade` AS `grade`,`Crop`.`moisture` AS `moisture`,`Crop`.`garbage` AS `garbage`,`Crop`.`minerals` AS `minerals`,`Crop`.`nature` AS `nature`, `Supplier_id`, `Warehouse_id`,`Standard_id` from (((`Crop` join `Warehouse` on((`Crop`.`Warehouse_id` = `Warehouse`.`id`))) join `Supplier` on((`Crop`.`Supplier_id` = `Supplier`.`id`))) join `Standard` on((`Crop`.`Standard_id` = `Standard`.`id`)))");
+$result = $dbConnect->query("select `Crop`.`id` AS `id`,`Supplier`.`name` AS `supplier_name`,`Crop`.`date` AS `date`,`Warehouse`.`name` AS `warehouse_name`,`Crop`.`amount` AS `amount`,`Standard`.`name` AS `standard_name`,`Crop`.`name` AS `name`,`Crop`.`variety` AS `variety`,`Crop`.`grade` AS `grade`,`Crop`.`moisture` AS `moisture`,`Crop`.`garbage` AS `garbage`,`Crop`.`minerals` AS `minerals`,`Crop`.`nature` AS `nature`, `Supplier_id`, `Warehouse_id`,`Standard_id` from (((`Crop` join `Warehouse` on((`Crop`.`Warehouse_id` = `Warehouse`.`id`))) join `Supplier` on((`Crop`.`Supplier_id` = `Supplier`.`id`))) join `Standard` on((`Crop`.`Standard_id` = `Standard`.`id`))) where `amount` > 0");
 $list = $result->fetchAll(PDO::FETCH_ASSOC);
 
 $fields=['supplier_select','warehouse_select','standard_select','date','amount','name','variety','moisture','garbage','minerals','nature'];
@@ -36,7 +36,7 @@ if (isset($_POST['ok'])){
 		$error=[];
 		foreach ($_POST as $k => $v) {
 			if (in_array($k, $fields) && empty($v)){
-				$error[$k]="field must be filled!";
+				$error[$k]="Поле має бути заповнене!";
 			}
 		}
 			//проверка на непустые поля
@@ -71,6 +71,7 @@ if (isset($_POST['ok'])){
 				)"
 			);
 				$stmt->execute(["s_id"=>$supplier_ui,"dat"=>$date_ui,"w_id"=>$warehouse_ui,"a"=>$amount_ui,"s_id"=>$standard_ui,"n"=>$name_ui,"v"=>$variety_ui,"m"=>$moisture_ui,"g"=>$garbage_ui,"mi"=>$minerals_ui,"na"=>$nature_ui]);
+				header("Refresh:0");
 			}else{
 				$stmt = $dbConnect->prepare("UPDATE `Crop`
 					SET
@@ -87,12 +88,12 @@ if (isset($_POST['ok'])){
 					`nature`=:na
 					where `id`=:id");
 				$stmt->execute(["s_id"=>$supplier_ui,"dat"=>$date_ui,"w_id"=>$warehouse_ui,"a"=>$amount_ui,"s_id"=>$standard_ui,"n"=>$name_ui,"v"=>$variety_ui,"m"=>$moisture_ui,"g"=>$garbage_ui,"mi"=>$minerals_ui,"na"=>$nature_ui,"id"=>$chose_id]);
+				header("Refresh:0");
 
 			}
 		}
 	}
 	require_once '../grade.php';
-	header("Refresh:0");
 }
 
 if (!empty($chose_id)){

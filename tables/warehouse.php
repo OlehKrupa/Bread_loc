@@ -22,7 +22,7 @@ if (isset($_POST['ok'])){
 		$error=[];
 		foreach ($_POST as $k => $v) {
 			if (in_array($k, $fields) && empty($v)){
-				$error[$k]="field must be filled!";
+				$error[$k]="Поле має бути заповнене!";
 			}
 		}
 			//проверка на непустые поля
@@ -41,6 +41,7 @@ if (isset($_POST['ok'])){
 				)"
 			);
 				$stmt->execute(["n"=>$name_ui,"a"=>$address_ui,"c"=>$capacity_ui]);
+				header("Refresh:0");
 			}else{
 				$stmt = $dbConnect->prepare("UPDATE `Warehouse`
 					SET
@@ -49,10 +50,10 @@ if (isset($_POST['ok'])){
 					`capacity`=:c
 					where `id`=:id");
 				$stmt->execute(["n"=>$name_ui,"a"=>$address_ui,"c"=>$capacity_ui,"id"=>$chose_id]);
+				header("Refresh:0");
 			}
 		}
 	}
-	header("Refresh:0");
 }
 
 if (!empty($chose_id)){

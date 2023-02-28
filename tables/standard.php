@@ -30,7 +30,7 @@ if (isset($_POST['ok'])){
 		$error=[];
 		foreach ($_POST as $k => $v) {
 			if (in_array($k, $fields) && empty($v)){
-				$error[$k]="field must be filled!";
+				$error[$k]="Поле має бути заповнене!";
 			}
 		}
 			//проверка на непустые поля
@@ -65,6 +65,7 @@ if (isset($_POST['ok'])){
 				)"
 			);
 				$stmt->execute(["n"=>$name_ui,"min"=>$minor_ui,"max"=>$major_ui,"min_mo"=>$min_moisture_ui,"max_mo"=>$max_moisture_ui,"min_ga"=>$min_garbage_ui,"max_ga"=>$max_garbage_ui,"min_mi"=>$min_minerals_ui,"max_mi"=>$max_minerals_ui,"min_na"=>$min_nature_ui,"max_na"=>$max_nature_ui]);
+				header("Refresh:0");
 			}else{
 				$stmt = $dbConnect->prepare("UPDATE `Standard`
 					SET
@@ -81,10 +82,10 @@ if (isset($_POST['ok'])){
 					`max_nature`=:max_na
 					where `id`=:id");
 				$stmt->execute(["n"=>$name_ui,"min"=>$minor_ui,"max"=>$major_ui,"min_mo"=>$min_moisture_ui,"max_mo"=>$max_moisture_ui,"min_ga"=>$min_garbage_ui,"max_ga"=>$max_garbage_ui,"min_mi"=>$min_minerals_ui,"max_mi"=>$max_minerals_ui,"min_na"=>$min_nature_ui,"max_na"=>$max_nature_ui,"id"=>$chose_id]);
+				header("Refresh:0");
 			}
 		}
 	}
-	header("Refresh:0");
 }
 
 if (!empty($chose_id)){
