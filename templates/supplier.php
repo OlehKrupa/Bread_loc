@@ -11,15 +11,15 @@
 			<div class="col mx-2">
 				<div class="input-group m-2">
 					<span class="input-group-text" id="name">Назва</span>
-					<div class="invalid-feedback"><?php echo $error['name'] ?? '';?></div>
 					<textarea class="form-control <?php if(!empty($error['name'])) echo 'is-invalid' ?>" placeholder="" id="name" name="name" aria-describedby="name"><?php if (!empty($name_ui)){echo $name_ui;} ?></textarea>
+					<div class="invalid-feedback"><?php echo $error['name'] ?? '';?></div>
 				</div>
 			</div>
 			<div class="col mx-2">
 				<div class="input-group m-2">
 					<span class="input-group-text" id="number">Номер телефону</span>
-					<div class="invalid-feedback"><?php echo $error['number'] ?? '';?></div>
 					<input type="text" class="form-control <?php if(!empty($error['number'])) echo 'is-invalid' ?>" placeholder="" name="number" aria-describedby="number" value="<?php if (!empty($number_ui)){echo $number_ui;} ?>">
+					<div class="invalid-feedback"><?php echo $error['number'] ?? '';?></div>
 				</div>
 			</div>
 		</div>

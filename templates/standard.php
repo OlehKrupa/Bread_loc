@@ -11,19 +11,19 @@
 			<div class="col-4 px-2">
 				<div class="input-group m-2">
 					<span class="input-group-text" id="name">Назва</span>
-					<div class="invalid-feedback"><?php echo $error['name'] ?? '';?></div>
 					<textarea class="form-control <?php if(!empty($error['name'])) echo 'is-invalid' ?>" placeholder="" id="name" name="name" aria-describedby="name"><?php if (!empty($name_ui)){echo $name_ui;} ?></textarea>
+					<div class="invalid-feedback"><?php echo $error['name'] ?? '';?></div>
 				</div>
 				<div class="input-group m-2">
 					<span class="input-group-text" id="minor">Мінімальний ризик</span>
-					<div class="invalid-feedback"><?php echo $error['minor'] ?? '';?></div>
 					<input type="text" class="form-control <?php if(!empty($error['minor'])) echo 'is-invalid' ?>" placeholder="" name="minor" aria-describedby="minor" value="<?php if (!empty($minor_ui)){echo $minor_ui;} ?>">
+					<div class="invalid-feedback"><?php echo $error['minor'] ?? '';?></div>
 				</div>
 
 				<div class="input-group m-2">
 					<span class="input-group-text" id="major">Максимальний ризик</span>
-					<div class="invalid-feedback"><?php echo $error['major'] ?? '';?></div>
 					<input type="text" class="form-control <?php if(!empty($error['major'])) echo 'is-invalid' ?>" placeholder="" name="major" aria-describedby="major" value="<?php if (!empty($major_ui)){echo $major_ui;} ?>">
+					<div class="invalid-feedback"><?php echo $error['major'] ?? '';?></div>
 				</div>
 			</div>
 
@@ -35,36 +35,34 @@
 							<div class="col">
 								<div class="input-group m-1">
 									<span class="input-group-text" id="min_moisture">min</span>
-									<div class="invalid-feedback"><?php echo $error['min_moisture'] ?? '';?></div>
 									<input type="text" class="form-control <?php if(!empty($error['min_moisture'])) echo 'is-invalid' ?>" placeholder="" name="min_moisture" aria-describedby="min_moisture" value="<?php if (!empty($min_moisture_ui)){echo $min_moisture_ui;} ?>">
+									<div class="invalid-feedback"><?php echo $error['min_moisture'] ?? '';?></div>
 								</div>
 							</div>
 							<div class="col">
 								<div class="input-group m-1">
 									<span class="input-group-text" id="max_moisture">max</span>
-									<div class="invalid-feedback"><?php echo $error['max_moisture'] ?? '';?></div>
 									<input type="text" class="form-control <?php if(!empty($error['max_moisture'])) echo 'is-invalid' ?>" placeholder="" name="max_moisture" aria-describedby="max_moisture" value="<?php if (!empty($max_moisture_ui)){echo $max_moisture_ui;} ?>">
+									<div class="invalid-feedback"><?php echo $error['max_moisture'] ?? '';?></div>
 								</div>
 							</div>
 							
 						</div>
 						
-
 						<h5>Засміченість</h5>
 						<div class="row">
 							<div class="col">
 								<div class="input-group m-1">
 									<span class="input-group-text" id="min_garbage">min</span>
-									<div class="invalid-feedback"><?php echo $error['min_garbage'] ?? '';?></div>
 									<input type="text" class="form-control <?php if(!empty($error['min_garbage'])) echo 'is-invalid' ?>" placeholder="" name="min_garbage" aria-describedby="min_garbage" value="<?php if (!empty($min_garbage_ui)){echo $min_garbage_ui;} ?>">
+									<div class="invalid-feedback"><?php echo $error['min_garbage'] ?? '';?></div>
 								</div>
 							</div>
 							<div class="col">
-
 								<div class="input-group m-1">
 									<span class="input-group-text" id="max_garbage">max</span>
-									<div class="invalid-feedback"><?php echo $error['max_garbage'] ?? '';?></div>
 									<input type="text" class="form-control <?php if(!empty($error['max_garbage'])) echo 'is-invalid' ?>" placeholder="" name="max_garbage" aria-describedby="max_garbage" value="<?php if (!empty($max_garbage_ui)){echo $max_garbage_ui;} ?>">
+									<div class="invalid-feedback"><?php echo $error['max_garbage'] ?? '';?></div>
 								</div>
 							</div>
 						</div>
@@ -78,15 +76,15 @@
 							<div class="col">
 								<div class="input-group m-1">
 									<span class="input-group-text" id="min_minerals">min</span>
-									<div class="invalid-feedback"><?php echo $error['min_minerals'] ?? '';?></div>
 									<input type="text" class="form-control <?php if(!empty($error['min_minerals'])) echo 'is-invalid' ?>" placeholder="" name="min_minerals" aria-describedby="min_minerals" value="<?php if (!empty($min_minerals_ui)){echo $min_minerals_ui;} ?>">
+									<div class="invalid-feedback"><?php echo $error['min_minerals'] ?? '';?></div>
 								</div>
 							</div>
 							<div class="col">
 								<div class="input-group m-1">
 									<span class="input-group-text" id="max_minerals">max</span>
-									<div class="invalid-feedback"><?php echo $error['max_minerals'] ?? '';?></div>
 									<input type="text" class="form-control <?php if(!empty($error['max_minerals'])) echo 'is-invalid' ?>" placeholder="" name="max_minerals" aria-describedby="max_minerals" value="<?php if (!empty($max_minerals_ui)){echo $max_minerals_ui;} ?>">
+									<div class="invalid-feedback"><?php echo $error['max_minerals'] ?? '';?></div>
 								</div>
 							</div>
 						</div>
@@ -97,15 +95,15 @@
 							<div class="col">
 								<div class="input-group m-1">
 									<span class="input-group-text" id="min_nature">min</span>
-									<div class="invalid-feedback"><?php echo $error['min_nature'] ?? '';?></div>
 									<input type="text" class="form-control <?php if(!empty($error['min_nature'])) echo 'is-invalid' ?>" placeholder="" name="min_nature" aria-describedby="min_nature" value="<?php if (!empty($min_nature_ui)){echo $min_nature_ui;} ?>">
+									<div class="invalid-feedback"><?php echo $error['min_nature'] ?? '';?></div>
 								</div>
 							</div>
 							<div class="col">
 								<div class="input-group m-1">
 									<span class="input-group-text" id="max_nature">max</span>
-									<div class="invalid-feedback"><?php echo $error['max_nature'] ?? '';?></div>
 									<input type="text" class="form-control <?php if(!empty($error['max_nature'])) echo 'is-invalid' ?>" placeholder="" name="max_nature" aria-describedby="max_nature" value="<?php if (!empty($max_nature_ui)){echo $max_nature_ui;} ?>">
+									<div class="invalid-feedback"><?php echo $error['max_nature'] ?? '';?></div>
 								</div>
 							</div>
 						</div>

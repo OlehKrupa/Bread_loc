@@ -11,22 +11,22 @@
 			<div class="col mx-2">
 				<div class="input-group m-2">
 					<span class="input-group-text" id="name">Назва</span>
-					<div class="invalid-feedback"><?php echo $error['name'] ?? '';?></div>
 					<textarea class="form-control <?php if(!empty($error['name'])) echo 'is-invalid' ?>" id="name" name="name" aria-describedby="name"><?php if (!empty($name_ui)){echo $name_ui;} ?></textarea>
+					<div class="invalid-feedback"><?php echo $error['name'] ?? '';?></div>
 				</div>
 			</div>
 			<div class="col mx-2">
 				<div class="input-group m-2">
 					<span class="input-group-text" id="address">Адреса</span>
-					<div class="invalid-feedback"><?php echo $error['address'] ?? '';?></div>
 					<textarea class="form-control <?php if(!empty($error['address'])) echo 'is-invalid' ?>" id="address" name="address" aria-describedby="address" ><?php if (!empty($address_ui)){echo $address_ui;} ?></textarea>
+					<div class="invalid-feedback"><?php echo $error['address'] ?? '';?></div>
 				</div>
 			</div>
 			<div class="col mx-2">
 				<div class="input-group m-2">
 					<span class="input-group-text" id="capacity">Ємність</span>
-					<div class="invalid-feedback"><?php echo $error['capacity'] ?? '';?></div>
 					<input type="text" class="form-control <?php if(!empty($error['capacity'])) echo 'is-invalid' ?>" placeholder="" name="capacity" aria-describedby="capacity" value="<?php if (!empty($capacity_ui)){echo $capacity_ui;} ?>">
+					<div class="invalid-feedback"><?php echo $error['capacity'] ?? '';?></div>
 				</div>
 			</div>
 		</div>
