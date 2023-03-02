@@ -33,7 +33,29 @@ if (isset($_POST['ok'])){
 				$error[$k]="Поле має бути заповнене!";
 			}
 		}
-			//проверка на непустые поля
+
+		if (!isValidDecimal($min_moisture_ui)){
+			$error['min_moisture']="Формат дробів *.*!";
+		}
+		if (!isValidDecimal($max_moisture_ui)){
+			$error['max_moisture']="Формат дробів *.*!";
+		}
+		if (!isValidDecimal($min_garbage_ui)){
+			$error['min_garbage']="Формат дробів *.*!";
+		}
+		if (!isValidDecimal($max_garbage_ui)){
+			$error['max_garbage']="Формат дробів *.*!";
+		}
+		if (!isValidDecimal($min_minerals_ui)){
+			$error['min_minerals']="Формат дробів *.*!";
+		}
+		if (!isValidDecimal($max_minerals_ui)){
+			$error['max_minerals']="Формат дробів *.*!";
+		}
+		if ($max_nature_ui>990){
+			$error['max_nature']="Натура менша за 990!";
+		}
+
 		if (empty($error)){
 			if (empty($chose_id)){
 				$stmt = $dbConnect->prepare("INSERT INTO `Standard` (
@@ -124,20 +146,30 @@ if (isset($_POST['clear'])){
 
 
 if (isset($_POST['delete'])){
-	$result = $dbConnect->query("select `Crop`.`Standard_id` AS `Standard_id` from (`Crop` join `Standard` on((`Crop`.`Standard_id` = `Standard`.`id`))) GROUP BY `Standard_id`");
-	$list = $result->fetchAll(PDO::FETCH_ASSOC);
+	if(!empty($chose_id)){
+		$result = $dbConnect->query("select `Crop`.`Standard_id` AS `Standard_id` from (`Crop` join `Standard` on((`Crop`.`Standard_id` = `Standard`.`id`))) GROUP BY `Standard_id`");
+		$list = $result->fetchAll(PDO::FETCH_ASSOC);
 
-	foreach($list as $k => $v){
-		if ($chose_id==$v['Standard_id']){
-			echo '<script>alert("Не можна видалити, в поточний момент використовуєтсья як стандарт зберігання")</script>';
-			break;
-		} else {
-			$delete = $dbConnect->prepare("DELETE from Standard where id = :id");
-			$delete->execute(["id"=>$chose_id]);
+		foreach($list as $k => $v){
+			if ($chose_id==$v['Standard_id']){
+				echo '<script>alert("Не можна видалити, в поточний момент використовуєтсья як стандарт зберігання")</script>';
+				break;
+			} else {
+				$delete = $dbConnect->prepare("DELETE from Standard where id = :id");
+				$delete->execute(["id"=>$chose_id]);
+			}
 		}
+
+	} else{
+		echo "<script type='text/javascript'>alert('Помилка! Зерно на списання не обране!');</script>";
 	}
 
+	$_SESSION['standard_chose_id']=null;
 	header("Refresh:0");
+}
+
+function isValidDecimal($decimal) {
+	return preg_match('/^[0-9]+(\.[0-9]+)?$/', $decimal);
 }
 
 require_once TEMPLATES_PATH."standard.php";
