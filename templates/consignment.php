@@ -18,13 +18,7 @@
 								<?php if(!empty($crops_all)) foreach($crops_all as $key=>$value): ?>
 								<option 
 								value="<?php echo $value["id"];?>" 
-								data-amount="<?php echo $value["amount"];?>" 
-								data-moisture="<?php echo $value["moisture"];?>" 
-								data-garbage="<?php echo $value["garbage"];?>" 
-								data-minerals="<?php echo $value["minerals"];?>" 
-								data-nature="<?php echo $value["nature"];?>" 
-								<?php if ((!empty($crop_ui))&&($value["id"]==$crop_ui)){echo "selected";}?> 
-								>
+								<?php if ((!empty($crop_ui))&&($value["id"]==$crop_ui)){echo "selected";}?> >
 								<?php echo 
 								"Код: ".
 								$value["id"]." ".
@@ -64,38 +58,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col">
-				<div class="input-group m-2">
-					<span class="input-group-text" id="moisture">Вологість</span>
-					<input type="text" class="form-control <?php if(!empty($error['moisture'])) echo 'is-invalid' ?>" placeholder="" name="moisture" aria-describedby="moisture" value="<?php if(!empty($moisture_ui)){echo $moisture_ui;} ?>">
-					<div class="invalid-feedback"><?php echo $error['moisture'] ?? '';?></div>
-				</div>
-			</div>
-			<div class="col">
-				<div class="input-group m-2">
-					<span class="input-group-text" id="garbage">Сміття</span>
-					<input type="text" class="form-control <?php if(!empty($error['garbage'])) echo 'is-invalid' ?>" placeholder="" name="garbage" aria-describedby="garbage" value="<?php if(!empty($garbage_ui)){echo $garbage_ui;} ?>">
-					<div class="invalid-feedback"><?php echo $error['garbage'] ?? '';?></div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				<div class="input-group m-2">
-					<span class="input-group-text" id="minerals">PO₄</span>
-					<input type="text" class="form-control <?php if(!empty($error['minerals'])) echo 'is-invalid' ?>" placeholder="" id="" name="minerals" aria-describedby="minerals" value="<?php if(!empty($minerals_ui)){echo $minerals_ui;} ?>">
-					<div class="invalid-feedback"><?php echo $error['minerals'] ?? '';?></div>
-				</div>
-			</div>
-			<div class="col">
-				<div class="input-group m-2">
-					<span class="input-group-text" id="nature">г/л</span>
-					<input type="text" class="form-control <?php if(!empty($error['nature'])) echo 'is-invalid' ?>" placeholder="" name="nature" aria-describedby="nature" value="<?php if(!empty($nature_ui)){echo $nature_ui;} ?>">
-					<div class="invalid-feedback"><?php echo $error['nature'] ?? '';?></div>
-				</div>
-			</div>
-		</div>	
 	</div>
 
 </div>
@@ -166,26 +128,6 @@
 		});
 
 	} );
-</script>
-
-<script>
-	$(document).ready(function() {
-		$('#crop_select').on('change', function() {
-		console.log('select changed');
-			var selected_crop = $(this).find(':selected');
-			var amount = selected_crop.data('amount');
-			var moisture = selected_crop.data('moisture');
-			var garbage = selected_crop.data('garbage');
-			var minerals = selected_crop.data('minerals');
-			var nature = selected_crop.data('nature');
-
-			$('#amount').val(amount);
-			$('#moisture').val(moisture);
-			$('#garbage').val(garbage);
-			$('#minerals').val(minerals);
-			$('#nature').val(nature);
-		});
-	});
 </script>
 
 </div>
