@@ -24,7 +24,11 @@ if (isset($_POST['ok'])){
 				$error[$k]="Поле має бути заповнене!";
 			}
 		}
-			//проверка на непустые поля
+
+		if (!isValidPhoneNumber($number_ui)){
+			$error['number']="Формат номера телефону: 380*********";
+		}
+
 		if (empty($error)){
 			if (empty($chose_id)){
 				$stmt = $dbConnect->prepare("INSERT INTO `Supplier` (
@@ -46,7 +50,7 @@ if (isset($_POST['ok'])){
 					`number`=:nu
 					where `id`=:id");
 				$stmt->execute(["n"=>$name_ui,"nu"=>$number_ui,"id"=>$chose_id]);
-header("Refresh:0");
+				header("Refresh:0");
 			}
 		}
 	}
@@ -69,6 +73,7 @@ if (isset($_POST['clear'])){
 }
 
 if (isset($_POST['delete'])){
+	if(!empty($chose_id)){
 	$result = $dbConnect->query("select `Crop`.`Supplier_id` AS `Supplier_id` from (`Crop` join `Supplier` on((`Crop`.`Standard_id` = `Supplier`.`id`))) GROUP BY `Supplier_id`");
 	$list = $result->fetchAll(PDO::FETCH_ASSOC);
 
@@ -81,9 +86,17 @@ if (isset($_POST['delete'])){
 			$delete->execute(["id"=>$chose_id]);
 		}
 	}
-	
+	} else{
+		echo "<script type='text/javascript'>alert('Помилка! Постачальник для видалення не обраний!');</script>";
+	}
+	$_SESSION['supplier_chose_id']=null;
 	header("Refresh:0");
 }
+
+function isValidPhoneNumber($phoneNumber) {
+	return preg_match('/^380[0-9]{9}$/', $phoneNumber);
+}
+
 
 require_once TEMPLATES_PATH."supplier.php";
 ?>
