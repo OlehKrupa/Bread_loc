@@ -20,12 +20,17 @@ if (isset($_POST['ok'])){
 		$address_ui=htmlspecialchars($_POST['address']);
 		$capacity_ui=htmlspecialchars($_POST['capacity']);
 		$error=[];
+
+		if(!isValidPositiveInteger($capacity_ui)){
+			$error['capacity']="Ємність може бути лише додатнім цілим числом";
+		}
+
 		foreach ($_POST as $k => $v) {
 			if (in_array($k, $fields) && empty($v)){
 				$error[$k]="Поле має бути заповнене!";
 			}
 		}
-			//проверка на непустые поля
+		
 		if (empty($error)){
 			if (empty($chose_id)){
 				$stmt = $dbConnect->prepare("INSERT INTO `Warehouse` (
@@ -75,20 +80,28 @@ if (isset($_POST['clear'])){
 }
 
 if (isset($_POST['delete'])){
-	$result = $dbConnect->query("select `Crop`.`Warehouse_id` AS `Warehouse_id` from (`Crop` join `Warehouse` on((`Crop`.`Warehouse_id` = `Warehouse`.`id`))) GROUP BY `Warehouse_id`");
-	$list = $result->fetchAll(PDO::FETCH_ASSOC);
+	if(!empty($chose_id)){
+		$result = $dbConnect->query("select `Crop`.`Warehouse_id` AS `Warehouse_id` from (`Crop` join `Warehouse` on((`Crop`.`Warehouse_id` = `Warehouse`.`id`))) GROUP BY `Warehouse_id`");
+		$list = $result->fetchAll(PDO::FETCH_ASSOC);
 
-	foreach($list as $k => $v){
-		if ($chose_id==$v['Warehouse_id']){
-			echo '<script>alert("Не можна видалити, в поточний момент такий склад використовується для зберігання")</script>';
-			break;
-		} else {
-			$delete = $dbConnect->prepare("DELETE from Warehouse where id = :id");
-			$delete->execute(["id"=>$chose_id]);
+		foreach($list as $k => $v){
+			if ($chose_id==$v['Warehouse_id']){
+				echo '<script>alert("Не можна видалити, в поточний момент такий склад використовується для зберігання")</script>';
+				break;
+			} else {
+				$delete = $dbConnect->prepare("DELETE from Warehouse where id = :id");
+				$delete->execute(["id"=>$chose_id]);
+			}
 		}
+	} else{
+		echo "<script type='text/javascript'>alert('Помилка! Склад для видалення не обраний!');</script>";
 	}
-	
+	$_SESSION['warehouse_chose_id']=null;
 	header("Refresh:0");
+}
+
+function isValidPositiveInteger($number) {
+	return preg_match('/^[1-9][0-9]*$/', $number);
 }
 
 require_once TEMPLATES_PATH."warehouse.php";
