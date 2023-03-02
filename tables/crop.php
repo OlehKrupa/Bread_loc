@@ -6,7 +6,7 @@ if (isset($_POST['crop_chose_id'])){
 }
 
 if (!empty($_SESSION['crop_chose_id'])){
-$chose_id=$_SESSION['crop_chose_id'];
+	$chose_id=$_SESSION['crop_chose_id'];
 }
 
 if (isset($_POST['refresh'])){
@@ -16,6 +16,9 @@ if (isset($_POST['refresh'])){
 
 $result = $dbConnect->query("select `Crop`.`id` AS `id`,`Supplier`.`name` AS `supplier_name`,`Crop`.`date` AS `date`,`Warehouse`.`name` AS `warehouse_name`,`Crop`.`amount` AS `amount`,`Standard`.`name` AS `standard_name`,`Crop`.`name` AS `name`,`Crop`.`variety` AS `variety`,`Crop`.`grade` AS `grade`,`Crop`.`moisture` AS `moisture`,`Crop`.`garbage` AS `garbage`,`Crop`.`minerals` AS `minerals`,`Crop`.`nature` AS `nature`, `Supplier_id`, `Warehouse_id`,`Standard_id` from (((`Crop` join `Warehouse` on((`Crop`.`Warehouse_id` = `Warehouse`.`id`))) join `Supplier` on((`Crop`.`Supplier_id` = `Supplier`.`id`))) join `Standard` on((`Crop`.`Standard_id` = `Standard`.`id`))) where `amount` > 0");
 $list = $result->fetchAll(PDO::FETCH_ASSOC);
+
+$sql=$dbConnect->query("select Crop.Warehouse_id as `id`, Warehouse.capacity, sum( Crop.amount ) as `all_amount` FROM Crop INNER JOIN Warehouse ON Crop.Warehouse_id = Warehouse.id GROUP BY Warehouse.id");
+$capacity=$sql->fetchAll(PDO::FETCH_ASSOC);
 
 $fields=['supplier_select','warehouse_select','standard_select','date','amount','name','variety','moisture','garbage','minerals','nature'];
 
@@ -39,7 +42,28 @@ if (isset($_POST['ok'])){
 				$error[$k]="Поле має бути заповнене!";
 			}
 		}
-			//проверка на непустые поля
+
+		foreach($capacity as $k=>$v){
+			if($v['id']==$warehouse_ui){
+				if (($v['all_amount']+$amount_ui)>$v['capacity']){
+					$error['warehouse_select']="Переповнення складу!";
+				}
+			}
+		}
+
+		if (!isValidDecimal($moisture_ui)){
+			$error['moisture']="Формат дробів *.*!";
+		}
+		if (!isValidDecimal($garbage_ui)){
+			$error['garbage']="Формат дробів *.*!";
+		}
+		if (!isValidDecimal($minerals_ui)){
+			$error['minerals']="Формат дробів *.*!";
+		}
+		if ($nature_ui>990){
+			$error['nature']="Натура не більше за 990!";
+		}
+
 		if (empty($error)){
 			if (empty($chose_id)){
 				$stmt = $dbConnect->prepare("INSERT INTO `Crop` (
@@ -89,11 +113,10 @@ if (isset($_POST['ok'])){
 					where `id`=:id");
 				$stmt->execute(["s_id"=>$supplier_ui,"dat"=>$date_ui,"w_id"=>$warehouse_ui,"a"=>$amount_ui,"s_id"=>$standard_ui,"n"=>$name_ui,"v"=>$variety_ui,"m"=>$moisture_ui,"g"=>$garbage_ui,"mi"=>$minerals_ui,"na"=>$nature_ui,"id"=>$chose_id]);
 				header("Refresh:0");
-
 			}
 		}
 	}
-	require_once '../grade.php';
+	//require_once '../grade.php';
 }
 
 if (!empty($chose_id)){
@@ -131,21 +154,35 @@ if (isset($_POST['clear'])){
 }
 
 if (isset($_POST['write_off'])){
-	$delete = $dbConnect->prepare("DELETE from Crop where id = :id");
-	$delete->execute(["id"=>$chose_id]);
+	if(!empty($chose_id)){
+		$delete = $dbConnect->prepare("DELETE from Crop where id = :id");
+		$delete->execute(["id"=>$chose_id]);
+		$_SESSION['crop_chose_id']=null;
+	} else{
+		echo "<script type='text/javascript'>alert('Помилка! Зерно на списання не обране!');</script>";
+	}
 	header("Refresh:0");
 }
 
 if (isset($_POST['dry'])){
-	$_SESSION['dry_id']=$chose_id;
-	require_once '../dry.php';
+	if(!empty($chose_id)){
+		$_SESSION['dry_id']=$chose_id;
+		require_once '../dry.php';
+	} else {
+		echo "<script type='text/javascript'>alert('Помилка! Зерно на сушку не обране!');</script>";
+	}
 	header("Refresh:0");
 }
 
 if (isset($_POST['sell'])){
-	$_SESSION['sell_id']=$chose_id;
-	header("location: /tables/consignment.php");
-	die();
+	if(!empty($chose_id)){
+		$_SESSION['sell_id']=$chose_id;
+		header("location: /tables/consignment.php");
+		die();
+	} else {
+		echo "<script type='text/javascript'>alert('Помилка! Зерно на продаж не обрано!');</script>";
+		header("Refresh:0");
+	}
 }
 
 $result = $dbConnect->query("SELECT * FROM `Supplier`");
@@ -157,6 +194,9 @@ $warehouse = $result->fetchAll(PDO::FETCH_ASSOC);
 $result = $dbConnect->query("SELECT * FROM `Standard`");
 $standart = $result->fetchAll(PDO::FETCH_ASSOC);
 
+function isValidDecimal($decimal) {
+	return preg_match('/^[0-9]+(\.[0-9]+)?$/', $decimal);
+}
 
 require_once TEMPLATES_PATH."crop.php";
 ?>
