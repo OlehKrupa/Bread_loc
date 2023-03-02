@@ -1,7 +1,7 @@
 <?php 
 $alert=[];
 
-$result=$dbConnect->query("select `Crop`.`name` AS `name`,`Crop`.`variety` AS `variety`,`Crop`.`grade` AS `grade`,`Crop`.`moisture` AS `moisture` from `Crop`");
+$result=$dbConnect->query("select `Crop`.`id`, `Crop`.`name` AS `name`,`Crop`.`variety` AS `variety`,`Crop`.`grade` AS `grade`,`Crop`.`moisture` AS `moisture` from `Crop` where `Crop`.`amount`>0");
 $list_grades = $result->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($list_grades as $k => $v){

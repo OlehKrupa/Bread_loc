@@ -4,7 +4,6 @@ if (!empty($_SESSION['dry_id'])){
 	$dry_id=$_SESSION['dry_id'];
 } else {
 	echo "<script type='text/javascript'>alert('Помилка! Зерно на сушку не обране!');</script>";
-	die();
 }
 //Максимально можливий відсоток сушки зерна (15%)
 $max_dry = 0.15;
