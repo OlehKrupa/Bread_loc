@@ -27,6 +27,32 @@ if (isset($_POST['crop_report'])){
 	print_r($result);
 }
 
+if (isset($_POST['selled_crop'])){
+	$stmt = $dbConnect->query("SELECT
+		Crop.id,
+		Supplier.`name` as `supplier_name`,
+		Crop.date,
+		Warehouse.`name` as `warehouse_name`,
+		Crop.amount,
+		Standard.`name` as `standard_name`,
+		Crop.`name`,
+		Crop.variety,
+		Crop.grade,
+		Crop.moisture,
+		Crop.garbage,
+		Crop.minerals,
+		Crop.nature 
+		FROM
+		Crop
+		INNER JOIN Standard ON Crop.Standard_id = Standard.id
+		INNER JOIN Warehouse ON Crop.Warehouse_id = Warehouse.id
+		INNER JOIN Supplier ON Crop.Supplier_id = Supplier.id
+
+		where amount=0");
+	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	print_r($result);
+}
+
 if (isset($_POST['crop_critical_report'])){
 	require_once "alert_cell.php";
 	print_r($alert);
@@ -98,7 +124,7 @@ if (isset($_POST['consignment_report'])){
 			where `Crop`.`date` BETWEEN :start_date and :end_date");
 
 		$stmt -> execute(["start_date"=>$date_start_ui,"end_date"=>$date_end_ui]);
-		$result = $stmt->fetchAll();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		print_r($result);
 	}else{
 		$stmt = $dbConnect ->prepare("SELECT
@@ -121,13 +147,12 @@ if (isset($_POST['consignment_report'])){
 			where `Consignment_OUT`.`date` BETWEEN :start_date and :end_date");
 
 		$stmt -> execute(["start_date"=>$date_start_ui,"end_date"=>$date_end_ui]);
-		$result = $stmt->fetchAll();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		print_r($result);
 	}
 
 	//Сделать вывод результа в excel
 
 }
-
 require_once TEMPLATES_PATH."report.php";
 ?>

@@ -9,6 +9,9 @@
 						<button type="submit" id="crop_report" name="crop_report" class="btn btn-info m-2">Загальний стан зберігання зернових</button>
 					</div>
 					<div class="col">
+						<button type="submit" id="selled_crop" name="selled_crop" class="btn btn-info m-2">Розпродане зерно</button>
+					</div>
+					<div class="col">
 						<button type="submit" id="crop_critical_report" name="crop_critical_report" class="btn btn-info m-2">Зерно в критичному стані</button>
 					</div>
 
