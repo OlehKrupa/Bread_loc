@@ -46,11 +46,8 @@ if (isset($_POST['ok'])){
 			}
 		}
 
-		$error=[];
-		foreach ($_POST as $k => $v) {
-			if (in_array($k, $fields) && empty($v)){
-				$error[$k]="Поле має бути заповнене!";
-			}
+		if (!isValidPhoneNumber($number_ui)){
+			$error['number']="Формат номера телефону: 380*********";
 		}
 
 		foreach($crops_all as $k=>$v){
@@ -61,11 +58,13 @@ if (isset($_POST['ok'])){
 			}
 		}
 
-		if (!isValidPhoneNumber($number_ui)){
-			$error['number']="Формат номера телефону: 380*********";
+		$error=[];
+		foreach ($_POST as $k => $v) {
+			if (in_array($k, $fields) && empty($v)){
+				$error[$k]="Поле має бути заповнене!";
+			}
 		}
-
-
+		
 			//проверка на непустые поля
 		if (empty($error)){
 			$stmt = $dbConnect->prepare("INSERT INTO `Consignment_OUT` (
