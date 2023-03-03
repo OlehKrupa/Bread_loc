@@ -28,11 +28,6 @@ if (isset($_POST['ok'])){
 		$min_nature_ui=htmlspecialchars($_POST['min_nature']);
 		$max_nature_ui=htmlspecialchars($_POST['max_nature']);
 		$error=[];
-		foreach ($_POST as $k => $v) {
-			if (in_array($k, $fields) && empty($v)){
-				$error[$k]="Поле має бути заповнене!";
-			}
-		}
 
 		if (!isValidDecimal($min_moisture_ui)){
 			$error['min_moisture']="Формат дробів *.*!";
@@ -54,6 +49,12 @@ if (isset($_POST['ok'])){
 		}
 		if ($max_nature_ui>990){
 			$error['max_nature']="Натура менша за 990!";
+		}
+
+		foreach ($_POST as $k => $v) {
+			if (in_array($k, $fields) && empty($v)){
+				$error[$k]="Поле має бути заповнене!";
+			}
 		}
 
 		if (empty($error)){
