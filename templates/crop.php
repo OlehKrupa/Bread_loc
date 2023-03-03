@@ -79,6 +79,7 @@
 				<option value="<?php echo $value["id"];?>" <?php if ((!empty($standard_ui))&&($value["id"]===$standard_ui)){echo "selected";}?> ><?php echo $value["name"];?></option>
 			<?php endforeach; ?>
 		</select>
+		<div class="invalid-feedback"><?php echo $error['standard_select'] ?? '';?></div>
 	</div>
 
 	<div class="row">

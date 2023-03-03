@@ -37,12 +37,7 @@ if (isset($_POST['ok'])){
 		$nature_ui=htmlspecialchars($_POST['nature']);
 
 		$error=[];
-		foreach ($_POST as $k => $v) {
-			if (in_array($k, $fields) && empty($v)){
-				$error[$k]="Поле має бути заповнене!";
-			}
-		}
-
+		
 		foreach($capacity as $k=>$v){
 			if($v['id']==$warehouse_ui){
 				if (($v['all_amount']+$amount_ui)>$v['capacity']){
@@ -62,6 +57,12 @@ if (isset($_POST['ok'])){
 		}
 		if ($nature_ui>990){
 			$error['nature']="Натура не більше за 990!";
+		}
+
+		foreach ($_POST as $k => $v) {
+			if (in_array($k, $fields) && empty($v)){
+				$error[$k]="Поле має бути заповнене!";
+			}
 		}
 
 		if (empty($error)){
