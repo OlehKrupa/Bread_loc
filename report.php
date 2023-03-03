@@ -28,7 +28,8 @@ if (isset($_POST['crop_report'])){
 }
 
 if (isset($_POST['crop_critical_report'])){
-
+	require_once "alert_cell.php";
+	print_r($alert);
 }
 
 if (isset($_POST['standard_report'])){
@@ -44,7 +45,18 @@ if (isset($_POST['supplier_report'])){
 }
 
 if (isset($_POST['warehouse_report'])){
-	$stmt = $dbConnect->query("select * from Warehouse");
+	$stmt = $dbConnect->query("SELECT
+		Warehouse.id,
+		Warehouse.`name`,
+		Warehouse.address,
+		sum( Crop.amount ) AS occupancy,
+		Warehouse.capacity,
+		SUM( Crop.amount )/ Warehouse.capacity * 100 AS percent 
+		FROM
+		Warehouse
+		INNER JOIN Crop ON Warehouse.id = Crop.Warehouse_id 
+		GROUP BY
+		Warehouse.id");
 	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	print_r($result);
 }

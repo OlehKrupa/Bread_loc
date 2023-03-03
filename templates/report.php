@@ -39,8 +39,8 @@
 						<div class="input-group m-2">
 							<span class="input-group-text" id="select_consignment">Дані про</span>
 							<select class="form-select <?php if(!empty($error['select_consignment'])) echo 'is-invalid' ?>" id="select_consignment" name="select_consignment">
-								<option <?php if($select_consignment_ui==="Crop") echo "selected" ?> value="Crop">Прийом</option>
-								<option <?php if($select_consignment_ui==="Consignment_OUT") echo "selected" ?> value="Consignment_OUT">Відправку</option>
+								<option <?php if ((!empty($select_consignment_ui))&&($select_consignment_ui==="Crop")) echo "selected" ?> value="Crop">Прийом</option>
+								<option <?php if ((!empty($select_consignment_ui))&&($select_consignment_ui==="Consignment_OUT")) echo "selected" ?> value="Consignment_OUT">Відправку</option>
 							</select>
 							<div class="invalid-feedback"><?php echo $error['select_consignment'] ?? '';?></div>
 						</div>
