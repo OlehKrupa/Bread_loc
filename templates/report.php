@@ -23,26 +23,26 @@
 				<div class="row">
 					<div class="col">
 						<div class="input-group m-2">
-							<span class="input-group-text" id="date_start">Початкова дата</span>
+							<span class="input-group-text" id="date_start">Від</span>
 							<input type="date" lang="uk" class="form-control <?php if(!empty($error['date_start'])) echo 'is-invalid' ?>" placeholder="" name="date_start" aria-describedby="date_start" value="<?php if(!empty($date_start_ui)){echo $date_start_ui;}?>">
 							<div class="invalid-feedback"><?php echo $error['date_start'] ?? '';?></div>
 						</div>
 					</div>
 					<div class="col">
 						<div class="input-group m-2">
-							<span class="input-group-text" id="date_end">Кінцева дата</span>
+							<span class="input-group-text" id="date_end">До</span>
 							<input type="date" lang="uk" class="form-control <?php if(!empty($error['date_end'])) echo 'is-invalid' ?>" placeholder="" name="date_end" aria-describedby="date_end" value="<?php if(!empty($date_end_ui)){echo $date_end_ui;}?>">
 							<div class="invalid-feedback"><?php echo $error['date_end'] ?? '';?></div>
 						</div>
 					</div>
 					<div class="col">
 						<div class="input-group m-2">
-							<span class="input-group-text" id="select">Дані про</span>
-							<select class="form-select <?php if(!empty($error['select'])) echo 'is-invalid' ?>" id="select" name="select">
-								<option value="Crop">Прийом</option>
-								<option value="Consignment_OUT">Відправку</option>
+							<span class="input-group-text" id="select_consignment">Дані про</span>
+							<select class="form-select <?php if(!empty($error['select_consignment'])) echo 'is-invalid' ?>" id="select_consignment" name="select_consignment">
+								<option <?php if($select_consignment_ui==="Crop") echo "selected" ?> value="Crop">Прийом</option>
+								<option <?php if($select_consignment_ui==="Consignment_OUT") echo "selected" ?> value="Consignment_OUT">Відправку</option>
 							</select>
-							<div class="invalid-feedback"><?php echo $error['select'] ?? '';?></div>
+							<div class="invalid-feedback"><?php echo $error['select_consignment'] ?? '';?></div>
 						</div>
 					</div>
 
