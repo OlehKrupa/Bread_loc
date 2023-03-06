@@ -1,6 +1,13 @@
 <?php 
 require_once "config.php";
 
+require_once 'vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+$spreadsheet = new Spreadsheet();
+
 if (isset($_POST['crop_report'])){
 	$stmt = $dbConnect->query("SELECT
 		Crop.id,
@@ -24,7 +31,48 @@ if (isset($_POST['crop_report'])){
 
 		where amount>0");
 	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	print_r($result);
+
+	// Add a new worksheet and set its title
+$worksheet = $spreadsheet->getActiveSheet();
+$worksheet->setTitle('Crop Data');
+
+// Write the column headers in the first row
+$worksheet->setCellValue('A1', 'ID');
+$worksheet->setCellValue('B1', 'Supplier Name');
+$worksheet->setCellValue('C1', 'Date');
+$worksheet->setCellValue('D1', 'Warehouse Name');
+$worksheet->setCellValue('E1', 'Amount');
+$worksheet->setCellValue('F1', 'Standard Name');
+$worksheet->setCellValue('G1', 'Name');
+$worksheet->setCellValue('H1', 'Variety');
+$worksheet->setCellValue('I1', 'Grade');
+$worksheet->setCellValue('J1', 'Moisture');
+$worksheet->setCellValue('K1', 'Garbage');
+$worksheet->setCellValue('L1', 'Minerals');
+$worksheet->setCellValue('M1', 'Nature');
+
+// Loop through the data and write it to the worksheet
+$row = 2;
+foreach ($result as $data) {
+    $worksheet->setCellValue('A' . $row, $data['id']);
+    $worksheet->setCellValue('B' . $row, $data['supplier_name']);
+    $worksheet->setCellValue('C' . $row, $data['date']);
+    $worksheet->setCellValue('D' . $row, $data['warehouse_name']);
+    $worksheet->setCellValue('E' . $row, $data['amount']);
+    $worksheet->setCellValue('F' . $row, $data['standard_name']);
+    $worksheet->setCellValue('G' . $row, $data['name']);
+    $worksheet->setCellValue('H' . $row, $data['variety']);
+    $worksheet->setCellValue('I' . $row, $data['grade']);
+    $worksheet->setCellValue('J' . $row, $data['moisture']);
+    $worksheet->setCellValue('K' . $row, $data['garbage']);
+    $worksheet->setCellValue('L' . $row, $data['minerals']);
+    $worksheet->setCellValue('M' . $row, $data['nature']);
+    $row++;
+}
+
+// Create a new Xlsx writer object and save the file to the desktop
+$writer = new Xlsx($spreadsheet);
+$writer->save('~/Desktop/crop_data.xlsx');
 }
 
 if (isset($_POST['selled_crop'])){
