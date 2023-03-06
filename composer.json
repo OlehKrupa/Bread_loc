@@ -1,0 +1,17 @@
+{
+    "name": "vagrant/bread.loc",
+    "autoload": {
+        "psr-4": {
+            "Vagrant\\BreadLoc\\": "src/"
+        }
+    },
+    
+    "require": {
+        "phpoffice/phpspreadsheet": "1.28.0"
+    },
+    "config": {
+        "platform": {
+            "php": "8.2"
+        }
+    }
+}
