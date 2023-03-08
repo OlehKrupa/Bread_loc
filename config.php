@@ -1,6 +1,6 @@
 <?php
 session_start();
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/Kiev');
  
 define("ROOT_PATH", dirname(__FILE__));
 define("TEMPLATES_PATH", dirname(__FILE__).DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR);
