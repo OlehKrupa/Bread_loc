@@ -1,7 +1,7 @@
 <?php 
 require_once "config.php";
 
-require_once __DIR__ . '/vendor/autoload.php';
+require 'vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -9,6 +9,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 $spreadsheet = new Spreadsheet();
 
 if (isset($_POST['crop_report'])){
+
 	$stmt = $dbConnect->query("SELECT
 		Crop.id,
 		Supplier.`name` as `supplier_name`,
@@ -31,7 +32,6 @@ if (isset($_POST['crop_report'])){
 
 		where amount>0");
 	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 	// Add a new worksheet and set its title
 $worksheet = $spreadsheet->getActiveSheet();
 $worksheet->setTitle('Crop Data');
@@ -72,7 +72,8 @@ foreach ($result as $data) {
 
 // Create a new Xlsx writer object and save the file to the desktop
 $writer = new Xlsx($spreadsheet);
-$writer->save('~/Desktop/crop_data.xlsx');
+$writer->save('reports/crop_data.xlsx');
+
 }
 
 if (isset($_POST['selled_crop'])){
