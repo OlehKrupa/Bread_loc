@@ -102,7 +102,6 @@ if (isset($_POST['ok'])){
 				)"
 			);
 				$stmt->execute(["s_id"=>$supplier_ui,"dat"=>$date_ui,"w_id"=>$warehouse_ui,"a"=>$amount_ui,"st_id"=>$standard_ui,"n"=>$name_ui,"v"=>$variety_ui,"m"=>$moisture_ui,"g"=>$garbage_ui,"mi"=>$minerals_ui,"na"=>$nature_ui]);
-				require_once '../grade.php';
 				header("Refresh:0");
 			}else{
 				$stmt = $dbConnect->prepare("UPDATE `Crop`
@@ -120,7 +119,6 @@ if (isset($_POST['ok'])){
 					`nature`=:na
 					where `id`=:id");
 				$stmt->execute(["s_id"=>$supplier_ui,"dat"=>$date_ui,"w_id"=>$warehouse_ui,"a"=>$amount_ui,"st_id"=>$standard_ui,"n"=>$name_ui,"v"=>$variety_ui,"m"=>$moisture_ui,"g"=>$garbage_ui,"mi"=>$minerals_ui,"na"=>$nature_ui,"id"=>$chose_id]);
-				require_once '../grade.php';
 				header("Refresh:0");
 			}
 		}
