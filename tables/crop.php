@@ -38,12 +38,18 @@ if (isset($_POST['ok'])){
 
 		$error=[];
 		
-		foreach($capacity as $k=>$v){
-			if($v['id']==$warehouse_ui){
-				if (($v['all_amount']+$amount_ui)>$v['capacity']){
-					$error['warehouse_select']="Переповнення складу!";
+		if (empty($chose_id)){
+			foreach($capacity as $k=>$v){
+				if($v['id']==$warehouse_ui){
+					if (($v['all_amount']+$amount_ui)>($v['capacity']+$v['capacity']*0.1)){
+						$error['warehouse_select']="Переповнення складу!";
+					}
 				}
 			}
+		}
+
+		if (!isValidPositiveInteger($nature_ui)){
+			$error['nature']="Має бути цілим додатнім!";
 		}
 
 		if (!isValidDecimal($moisture_ui)){
@@ -86,7 +92,7 @@ if (isset($_POST['ok'])){
 					:dat,
 					:w_id, 
 					:a, 
-					:s_id, 
+					:st_id, 
 					:n, 
 					:v, 
 					:m, 
@@ -95,7 +101,8 @@ if (isset($_POST['ok'])){
 					:na
 				)"
 			);
-				$stmt->execute(["s_id"=>$supplier_ui,"dat"=>$date_ui,"w_id"=>$warehouse_ui,"a"=>$amount_ui,"s_id"=>$standard_ui,"n"=>$name_ui,"v"=>$variety_ui,"m"=>$moisture_ui,"g"=>$garbage_ui,"mi"=>$minerals_ui,"na"=>$nature_ui]);
+				$stmt->execute(["s_id"=>$supplier_ui,"dat"=>$date_ui,"w_id"=>$warehouse_ui,"a"=>$amount_ui,"st_id"=>$standard_ui,"n"=>$name_ui,"v"=>$variety_ui,"m"=>$moisture_ui,"g"=>$garbage_ui,"mi"=>$minerals_ui,"na"=>$nature_ui]);
+				require_once '../grade.php';
 				header("Refresh:0");
 			}else{
 				$stmt = $dbConnect->prepare("UPDATE `Crop`
@@ -104,7 +111,7 @@ if (isset($_POST['ok'])){
 					`date`=:dat,
 					`Warehouse_id`=:w_id,
 					`amount`=:a,
-					`Standard_id`=:s_id,
+					`Standard_id`=:st_id,
 					`name`=:n,
 					`variety`=:v,
 					`moisture`=:m,
@@ -112,12 +119,12 @@ if (isset($_POST['ok'])){
 					`minerals`=:mi,
 					`nature`=:na
 					where `id`=:id");
-				$stmt->execute(["s_id"=>$supplier_ui,"dat"=>$date_ui,"w_id"=>$warehouse_ui,"a"=>$amount_ui,"s_id"=>$standard_ui,"n"=>$name_ui,"v"=>$variety_ui,"m"=>$moisture_ui,"g"=>$garbage_ui,"mi"=>$minerals_ui,"na"=>$nature_ui,"id"=>$chose_id]);
+				$stmt->execute(["s_id"=>$supplier_ui,"dat"=>$date_ui,"w_id"=>$warehouse_ui,"a"=>$amount_ui,"st_id"=>$standard_ui,"n"=>$name_ui,"v"=>$variety_ui,"m"=>$moisture_ui,"g"=>$garbage_ui,"mi"=>$minerals_ui,"na"=>$nature_ui,"id"=>$chose_id]);
+				require_once '../grade.php';
 				header("Refresh:0");
 			}
 		}
 	}
-	//require_once '../grade.php';
 }
 
 if (!empty($chose_id)){
@@ -169,6 +176,7 @@ if (isset($_POST['dry'])){
 	if(!empty($chose_id)){
 		$_SESSION['dry_id']=$chose_id;
 		require_once '../dry.php';
+		require_once '../grade.php';
 	} else {
 		echo "<script type='text/javascript'>alert('Помилка! Зерно на сушку не обране!');</script>";
 	}
@@ -197,6 +205,10 @@ $standart = $result->fetchAll(PDO::FETCH_ASSOC);
 
 function isValidDecimal($decimal) {
 	return preg_match('/^[0-9]+(\.[0-9]+)?$/', $decimal);
+}
+
+function isValidPositiveInteger($pInteger) {
+	return preg_match('/^[1-9][0-9]*$/', $pInteger);
 }
 
 require_once TEMPLATES_PATH."crop.php";

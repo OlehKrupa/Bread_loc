@@ -29,6 +29,14 @@ if (isset($_POST['ok'])){
 		$max_nature_ui=htmlspecialchars($_POST['max_nature']);
 		$error=[];
 
+		if (!isValidPositiveInteger($minor_ui)){
+			$error['minor']="Має бути цілим додатнім!";
+		}
+
+		if (!isValidPositiveInteger($major_ui)){
+			$error['major']="Має бути цілим додатнім!";
+		}
+
 		if (!isValidDecimal($min_moisture_ui)){
 			$error['min_moisture']="Формат дробів *.*!";
 		}
@@ -171,6 +179,10 @@ if (isset($_POST['delete'])){
 
 function isValidDecimal($decimal) {
 	return preg_match('/^[0-9]+(\.[0-9]+)?$/', $decimal);
+}
+
+function isValidPositiveInteger($pInteger) {
+	return preg_match('/^[1-9][0-9]*$/', $pInteger);
 }
 
 require_once TEMPLATES_PATH."standard.php";

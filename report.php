@@ -9,10 +9,10 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 $spreadsheet = new Spreadsheet();
 
 function download_file($path_to_file){
-header('Content-Type: application/octet-stream');
-header('Content-Disposition: attachment; filename="' . basename($path_to_file) . '"');
-header('Content-Length: ' . filesize($path_to_file));
-readfile($path_to_file);
+	header('Content-Type: application/octet-stream');
+	header('Content-Disposition: attachment; filename="' . basename($path_to_file) . '"');
+	header('Content-Length: ' . filesize($path_to_file));
+	readfile($path_to_file);
 }
 
 if (isset($_POST['crop_report'])){
@@ -72,8 +72,8 @@ if (isset($_POST['crop_report'])){
 	}
 
 	$writer = new Xlsx($spreadsheet);
-	$writer->save('reports/звіт_зерно.xlsx');
-	download_file('reports/звіт_зерно.xlsx');
+	$writer->save('reports/зерно_'.date('Y-m-d').'_звіт.xlsx');
+	download_file('reports/зерно_'.date('Y-m-d').'_звіт.xlsx');
 
 }
 
@@ -131,8 +131,8 @@ if (isset($_POST['selled_crop'])){
 	}
 
 	$writer = new Xlsx($spreadsheet);
-	$writer->save('reports/розпродане_зерно_звіт.xlsx');
-	download_file('reports/розпродане_зерно_звіт.xlsx');
+	$writer->save('reports/розпродане_зерно_'.date('Y-m-d').'_звіт.xlsx');
+	download_file('reports/розпродане_зерно_'.date('Y-m-d').'_звіт.xlsx');
 
 }
 
@@ -151,8 +151,8 @@ if (isset($_POST['crop_critical_report'])){
 	}
 
 	$writer = new Xlsx($spreadsheet);
-	$writer->save('reports/критичні_місця_звіт.xlsx');
-	download_file('reports/критичні_місця_звіт.xlsx');
+	$writer->save('reports/критичні_показники_'.date('Y-m-d').'_звіт.xlsx');
+	download_file('reports/критичні_показники_'.date('Y-m-d').'_звіт.xlsx');
 
 }
 
@@ -205,8 +205,8 @@ if (isset($_POST['standard_report'])){
 	}
 
 	$writer = new Xlsx($spreadsheet);
-	$writer->save('reports/стандарти_зберігання_звіт.xlsx');
-	download_file('reports/стандарти_зберігання_звіт.xlsx');
+	$writer->save('reports/стандарти_зберігання_'.date('Y-m-d').'_звіт.xlsx');
+	download_file('reports/стандарти_зберігання_'.date('Y-m-d').'_звіт.xlsx');
 }
 
 if (isset($_POST['supplier_report'])){
@@ -248,8 +248,8 @@ if (isset($_POST['supplier_report'])){
 	}
 
 	$writer = new Xlsx($spreadsheet);
-	$writer->save('reports/постачальники_звіт.xlsx');
-	download_file('reports/постачальники_звіт.xlsx');
+	$writer->save('reports/постачальники_'.date('Y-m-d').'_звіт.xlsx');
+	download_file('reports/постачальники_'.date('Y-m-d').'_звіт.xlsx');
 
 }
 
@@ -292,8 +292,8 @@ if (isset($_POST['warehouse_report'])){
 	}
 
 	$writer = new Xlsx($spreadsheet);
-	$writer->save('reports/заповненість_складів_звіт.xlsx');
-	download_file('reports/заповненість_складів_звіт.xlsx');
+	$writer->save('reports/заповненість_складів_'.date('Y-m-d').'_звіт.xlsx');
+	download_file('reports/заповненість_складів_'.date('Y-m-d').'_звіт.xlsx');
 
 }
 
@@ -312,11 +312,11 @@ if (isset($_POST['consignment_report'])){
 
 	if($select_consignment_ui=="Crop"){
 		$stmt = $dbConnect -> prepare("SELECT
-			Supplier.`name` as `supplier_name`,
+			Supplier.`name` AS supplier_name,
 			Crop.date,
-			Warehouse.`name` as `warehouse_name`,
-			Crop.amount,
-			Standard.`name` as `standard_name`,
+			Warehouse.`name` AS warehouse_name,
+			Crop.amount + COALESCE ( Consignment_OUT.amount, 0 ) AS amount,
+			Standard.`name` AS standard_name,
 			Crop.`name`,
 			Crop.variety,
 			Crop.grade,
@@ -329,6 +329,7 @@ if (isset($_POST['consignment_report'])){
 			INNER JOIN Standard ON Crop.Standard_id = Standard.id
 			INNER JOIN Warehouse ON Crop.Warehouse_id = Warehouse.id
 			INNER JOIN Supplier ON Crop.Supplier_id = Supplier.id
+			LEFT JOIN Consignment_OUT ON Crop.id = Consignment_OUT.Crop_id
 
 			where `Crop`.`date` BETWEEN :start_date and :end_date");
 

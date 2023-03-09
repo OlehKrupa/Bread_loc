@@ -1,3 +1,18 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : Vagrant
+ Source Server Type    : MySQL
+ Source Server Version : 80032
+ Source Host           : localhost:3306
+ Source Schema         : bread.loc
+
+ Target Server Type    : MySQL
+ Target Server Version : 80032
+ File Encoding         : 65001
+
+ Date: 09/03/2023 19:16:59
+*/
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -21,7 +36,7 @@ CREATE TABLE `Consignment_OUT`  (
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE,
   INDEX `fk_Consignment_OUT_Crop1_idx`(`Crop_id`) USING BTREE,
   CONSTRAINT `fk_Consignment_OUT_Crop1` FOREIGN KEY (`Crop_id`) REFERENCES `Crop` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for Crop
@@ -49,7 +64,7 @@ CREATE TABLE `Crop`  (
   CONSTRAINT `fk_Crop_Standard1` FOREIGN KEY (`Standard_id`) REFERENCES `Standard` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_Crop_Supplier1` FOREIGN KEY (`Supplier_id`) REFERENCES `Supplier` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_Crop_Warehouse1` FOREIGN KEY (`Warehouse_id`) REFERENCES `Warehouse` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for Standard
@@ -70,7 +85,7 @@ CREATE TABLE `Standard`  (
   `max_nature` float NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for Supplier
@@ -82,7 +97,7 @@ CREATE TABLE `Supplier`  (
   `number` varchar(16) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for Warehouse
@@ -95,7 +110,7 @@ CREATE TABLE `Warehouse`  (
   `capacity` decimal(10, 0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idWarehouse_UNIQUE`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- View structure for Alert_view

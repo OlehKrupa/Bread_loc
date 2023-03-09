@@ -151,7 +151,7 @@
 					<td><?php echo $row['min_minerals']; ?></td>
 					<td><?php echo $row['max_minerals']; ?></td>
 					<td><?php echo $row['min_nature']; ?></td>
-					<td><?php echo $row['min_nature']; ?></td>
+					<td><?php echo $row['max_nature']; ?></td>
 				</tr >
 			<?php endforeach; ?> 
 		</tbody>

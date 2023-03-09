@@ -1,6 +1,6 @@
 <?php
 //Шкала словесних оцінок та меж балів, з яких вони починаютсья
-$grade_ranges = [0=>"Зіпсовано",5=>"Погано",10=>"Задовільно",15=>"Добре",20=>"Відмінно"];
+$grade_ranges = [1=>"Зіпсовано",2=>"Погано",3=>"Задовільно",4=>"Добре",5=>"Відмінно"];
 //Початкове default значення оцінки
 $grade="Задовільно";
 
@@ -71,16 +71,16 @@ foreach ($list as $value) {
 	}
 
 	//Переклад балу якості зерна в словесний відповідник
-	if ($final_grade>20){
-		$grade=$grade_ranges[20];
-	}elseif ($final_grade>15){
-		$grade=$grade_ranges[15];
-	}elseif ($final_grade>10){
-		$grade=$grade_ranges[10];
-	}elseif ($final_grade>5){
+	if ($final_grade>21){
 		$grade=$grade_ranges[5];
+	}elseif ($final_grade>16){
+		$grade=$grade_ranges[4];
+	}elseif ($final_grade>11){
+		$grade=$grade_ranges[3];
+	}elseif ($final_grade>6){
+		$grade=$grade_ranges[2];
 	}else{
-		$grade=$grade_ranges[0];
+		$grade=$grade_ranges[1];
 	}
 
 	//Виконання запиту на оновлення оцінки зерна

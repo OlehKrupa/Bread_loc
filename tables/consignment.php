@@ -46,6 +46,7 @@ if (isset($_POST['ok'])){
 			}
 		}
 
+		$error=[];
 		if (!isValidPhoneNumber($number_ui)){
 			$error['number']="Формат номера телефону: 380*********";
 		}
@@ -58,7 +59,6 @@ if (isset($_POST['ok'])){
 			}
 		}
 
-		$error=[];
 		foreach ($_POST as $k => $v) {
 			if (in_array($k, $fields) && empty($v)){
 				$error[$k]="Поле має бути заповнене!";
