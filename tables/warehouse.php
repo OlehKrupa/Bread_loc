@@ -87,12 +87,13 @@ if (isset($_POST['delete'])){
 		foreach($list as $k => $v){
 			if ($chose_id==$v['Warehouse_id']){
 				echo '<script>alert("Не можна видалити, в поточний момент такий склад використовується для зберігання")</script>';
-				break;
-			} else {
-				$delete = $dbConnect->prepare("DELETE from Warehouse where id = :id");
-				$delete->execute(["id"=>$chose_id]);
-			}
+				header("Refresh:0");
+			} 
 		}
+
+		$delete = $dbConnect->prepare("DELETE from Warehouse where id = :id");
+		$delete->execute(["id"=>$chose_id]);
+
 	} else{
 		echo "<script type='text/javascript'>alert('Помилка! Склад для видалення не обраний!');</script>";
 	}

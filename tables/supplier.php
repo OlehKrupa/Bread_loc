@@ -75,18 +75,19 @@ if (isset($_POST['clear'])){
 
 if (isset($_POST['delete'])){
 	if(!empty($chose_id)){
-	$result = $dbConnect->query("select `Crop`.`Supplier_id` AS `Supplier_id` from (`Crop` join `Supplier` on((`Crop`.`Standard_id` = `Supplier`.`id`))) GROUP BY `Supplier_id`");
-	$list = $result->fetchAll(PDO::FETCH_ASSOC);
+		$result = $dbConnect->query("select `Crop`.`Supplier_id` AS `Supplier_id` from (`Crop` join `Supplier` on((`Crop`.`Standard_id` = `Supplier`.`id`))) GROUP BY `Supplier_id`");
+		$list = $result->fetchAll(PDO::FETCH_ASSOC);
 
-	foreach($list as $k => $v){
-		if ($chose_id==$v['Supplier_id']){
-			echo '<script>alert("Не можна видалити, в поточний момент такий постачальник наявний в таблиці зберігання")</script>';
-			break;
-		} else {
-			$delete = $dbConnect->prepare("DELETE from Supplier where id = :id");
-			$delete->execute(["id"=>$chose_id]);
+		foreach($list as $k => $v){
+			if ($chose_id==$v['Supplier_id']){
+				echo '<script>alert("Не можна видалити, в поточний момент такий постачальник наявний в таблиці зберігання")</script>';
+				header("Refresh:0");
+			} 
 		}
-	}
+
+		$delete = $dbConnect->prepare("DELETE from Supplier where id = :id");
+		$delete->execute(["id"=>$chose_id]);
+
 	} else{
 		echo "<script type='text/javascript'>alert('Помилка! Постачальник для видалення не обраний!');</script>";
 	}
