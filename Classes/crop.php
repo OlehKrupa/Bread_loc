@@ -1,5 +1,7 @@
 <?php
-class Crop {
+namespace Bread\classes;
+
+class Crop implements iterator {
     private const GRADES = ["Зіпсовано","Погано","Задовільно","Добре","Відмінно"];
     private const TABLE = "Crop";
     private int $id;
@@ -32,6 +34,43 @@ class Crop {
         $this->garbage = $garbage;
         $this->minerals = $minerals;
         $this->nature = $nature;
+    }
+
+    private int $position = 0;
+    
+    public function current() {
+        $props = [
+            'id' => $this->id,
+            'supplier_id' => $this->supplier_id,
+            'date' => $this->date,
+            'warehouse_id' => $this->warehouse_id,
+            'amount' => $this->amount,
+            'standard_id' => $this->standard_id,
+            'name' => $this->name,
+            'variety' => $this->variety,
+            'grade' => $this->grade,
+            'moisture' => $this->moisture,
+            'garbage' => $this->garbage,
+            'minerals' => $this->minerals,
+            'nature' => $this->nature,
+        ];
+        return $props;
+    }
+    
+    public function key() {
+        return $this->position;
+    }
+    
+    public function next() {
+        ++$this->position;
+    }
+    
+    public function rewind() {
+        $this->position = 0;
+    }
+    
+    public function valid() {
+        return isset($this->id);
     }
 
     public static function updateGrade(){

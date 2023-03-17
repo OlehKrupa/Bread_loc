@@ -1,4 +1,6 @@
 <?php
+namespace Bread\classes;
+
 class Supplier {
     private const TABLE = "Supplier";
     private int $id;

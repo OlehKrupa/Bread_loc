@@ -1,6 +1,8 @@
 <?php
 session_start();
-date_default_timezone_set('Europe/Kyiv');
+date_default_timezone_set('Europe/Kiev');
+ini_set("display_errors", 1);
+error_reporting(E_ALL);
  
 define("ROOT_PATH", dirname(__FILE__));
 define("TEMPLATES_PATH", dirname(__FILE__).DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR);
@@ -11,6 +13,17 @@ define("DB_NAME","bread.loc");
 define("DB_USER","grain_administrator");
 define("DB_USER_PASS","Crop1234@");
 
-$dbConnect = new PDO('mysql:host=localhost;dbname='.DB_NAME,DB_USER,DB_USER_PASS);
+spl_autoload_register(function($class){
+	$prefix = 'Bread\\';
+	$base_dir = ROOT_PATH . DIRECTORY_SEPARATOR;
+	$len = strlen($prefix);
+	if (strncmp($prefix, $class, $len) !== 0){
+		return;
+	}
+	$relativeClass = substr($class, $len);
+	$file = $base_dir.str_replace('\\', '/', $relativeClass).'.php';
+});
+
+$dbConnect = \Bread\classes\DB::getInstance()->connect;
 
 ?>

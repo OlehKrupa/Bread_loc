@@ -39,6 +39,9 @@
             <li class="nav-item dropdown">
               <a class="nav-link active" aria-current="page" id="Reports" href="../report.php">Звіти</a>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link active" aria-current="page" id="Reports" href="../test.php">test</a>
+            </li>
           </ul>
         </div>
       <?php endif; ?>

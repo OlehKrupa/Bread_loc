@@ -1,4 +1,6 @@
 <?php
+namespace Bread\classes;
+
 class Warehouse {
     private const TABLE = "Warehouse";
     private int $id;
