@@ -3,7 +3,7 @@ session_start();
 date_default_timezone_set('Europe/Kiev');
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
- 
+
 define("ROOT_PATH", dirname(__FILE__));
 define("TEMPLATES_PATH", dirname(__FILE__).DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR);
 define("TABLES_PATH", dirname(__FILE__).DIRECTORY_SEPARATOR."tables".DIRECTORY_SEPARATOR);
@@ -22,6 +22,9 @@ spl_autoload_register(function($class){
 	}
 	$relativeClass = substr($class, $len);
 	$file = $base_dir.str_replace('\\', '/', $relativeClass).'.php';
+	if (file_exists($file)){
+		require $file;
+	}
 });
 
 $dbConnect = \Bread\classes\DB::getInstance()->connect;
