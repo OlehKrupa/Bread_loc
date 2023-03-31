@@ -9,23 +9,11 @@ define("TEMPLATES_PATH", dirname(__FILE__).DIRECTORY_SEPARATOR."templates".DIREC
 define("TABLES_PATH", dirname(__FILE__).DIRECTORY_SEPARATOR."tables".DIRECTORY_SEPARATOR);
 define("CLASS_PATH", dirname(__FILE__).DIRECTORY_SEPARATOR."classes".DIRECTORY_SEPARATOR);
 
-define("DB_NAME","bread.loc");
-define("DB_USER","grain_administrator");
-define("DB_USER_PASS","Crop1234@");
+//composer
+require_once ROOT_PATH.DIRECTORY_SEPARATOR."vendor".DIRECTORY_SEPARATOR."autoload.php";
 
-spl_autoload_register(function($class){
-	$prefix = 'Bread\\';
-	$base_dir = ROOT_PATH . DIRECTORY_SEPARATOR;
-	$len = strlen($prefix);
-	if (strncmp($prefix, $class, $len) !== 0){
-		return;
-	}
-	$relativeClass = substr($class, $len);
-	$file = $base_dir.str_replace('\\', '/', $relativeClass).'.php';
-	if (file_exists($file)){
-		require $file;
-	}
-});
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 $dbConnect = \Bread\classes\DB::getInstance()->connect;
 

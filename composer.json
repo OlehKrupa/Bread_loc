@@ -2,12 +2,15 @@
     "name": "vagrant/bread.loc",
     "autoload": {
         "psr-4": {
+            "Bread\\classes\\":"classes/",
             "Vagrant\\BreadLoc\\": "src/"
         }
     },
     
     "require": {
-        "phpoffice/phpspreadsheet": "1.28.0"
+        "phpoffice/phpspreadsheet": "1.28.0",
+        "vlucas/phpdotenv": "^5.5",
+        "monolog/monolog": "^3.3"
     },
     "config": {
         "platform": {

@@ -11,7 +11,7 @@ class DB
 
     protected function __construct() 
     {
-        $this->connect = new \PDO('mysql:host=localhost;dbname='.DB_NAME,DB_USER,DB_USER_PASS);
+        $this->connect = new \PDO('mysql:host=localhost;dbname='.$_ENV['DB_NAME'],$_ENV['DB_USER'],$_ENV['DB_USER_PASS']);
     }
 }
 
