@@ -11,7 +11,7 @@
  Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 09/03/2023 19:13:00
+ Date: 12/04/2023 19:32:57
 */
 
 SET NAMES utf8mb4;
@@ -36,13 +36,13 @@ CREATE TABLE `Consignment_OUT`  (
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE,
   INDEX `fk_Consignment_OUT_Crop1_idx`(`Crop_id`) USING BTREE,
   CONSTRAINT `fk_Consignment_OUT_Crop1` FOREIGN KEY (`Crop_id`) REFERENCES `Crop` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of Consignment_OUT
 -- ----------------------------
-INSERT INTO `Consignment_OUT` VALUES (30, 5, 15, '2023-03-09 15:23:56', 'Королівський Смак', '380976545142', 0.11, 0.01, 0.001, 1100);
-INSERT INTO `Consignment_OUT` VALUES (32, 2, 1796, '2023-03-09 15:29:00', 'ТОВ &quot;Земелька&quot;', '380976512345', 0.02, 0.01, 0.05, 1000);
+INSERT INTO `Consignment_OUT` VALUES (33, 2, 96, '2023-03-15 16:24:24', 'ООО &quot;АгроТрейд&quot;', '380971230560', 0.02, 0.01, 0.05, 980);
+INSERT INTO `Consignment_OUT` VALUES (34, 17, 84, '2023-03-15 16:29:22', 'Дослідницький центр &quot;Зерно&quot;', '380165216515', 0.13, 0.01, 0.001, 960);
 
 -- ----------------------------
 -- Table structure for Crop
@@ -70,23 +70,23 @@ CREATE TABLE `Crop`  (
   CONSTRAINT `fk_Crop_Standard1` FOREIGN KEY (`Standard_id`) REFERENCES `Standard` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_Crop_Supplier1` FOREIGN KEY (`Supplier_id`) REFERENCES `Supplier` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_Crop_Warehouse1` FOREIGN KEY (`Warehouse_id`) REFERENCES `Warehouse` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of Crop
 -- ----------------------------
-INSERT INTO `Crop` VALUES (2, 1, '2022-12-09', 1, 0, 1, 'Соняшник', 'Олійка', 'Добре', 0.02, 0.01, 0.05, 980);
-INSERT INTO `Crop` VALUES (5, 1, '2023-02-07', 2, 4000, 1, 'Пшениця', 'Зернятко', 'Відмінно', 0.11, 0.01, 0.001, 975);
+INSERT INTO `Crop` VALUES (2, 1, '2022-12-09', 1, 1700, 1, 'Соняшник', 'Олійка', 'Добре', 0.02, 0.01, 0.05, 980);
+INSERT INTO `Crop` VALUES (5, 1, '2023-02-07', 2, 4015, 1, 'Пшениця', 'Зернятко', 'Відмінно', 0.12, 0.01, 0.001, 975);
 INSERT INTO `Crop` VALUES (6, 3, '2023-02-07', 5, 2012, 2, 'Пшениця', 'Зернятко', 'Добре', 0.11, 0.01, 0.01, 920);
-INSERT INTO `Crop` VALUES (8, 3, '2023-01-09', 3, 235, 3, 'Овес', 'Ірен', 'Добре', 0.14, 0.01, 0.0005, 900);
+INSERT INTO `Crop` VALUES (8, 3, '2023-01-09', 3, 235, 3, 'Овес', 'Ірен', 'Задовільно', 0.14, 0.01, 0.0005, 900);
 INSERT INTO `Crop` VALUES (9, 3, '2023-02-10', 3, 83, 3, 'Соя', 'Сія', 'Відмінно', 0.12, 0.01, 0.0001, 970);
 INSERT INTO `Crop` VALUES (10, 1, '2023-02-07', 4, 2546, 3, 'Пшениця', 'Зернятко', 'Погано', 0.2, 0.01, 0.01, 900);
 INSERT INTO `Crop` VALUES (11, 3, '2022-12-08', 1, 4000, 3, 'Соняшник', 'Олійка', 'Задовільно', 0.01, 0.001, 0.005, 800);
-INSERT INTO `Crop` VALUES (12, 3, '2023-01-09', 3, 235, 3, 'Овес', 'Ірен', 'Добре', 0.14, 0.01, 0.0005, 900);
+INSERT INTO `Crop` VALUES (12, 3, '2023-01-09', 3, 235, 3, 'Овес', 'Ірен', 'Задовільно', 0.14, 0.01, 0.0005, 900);
 INSERT INTO `Crop` VALUES (14, 1, '2023-02-07', 4, 1000, 1, 'Пшениця', 'Зернятко', 'Відмінно', 0.11, 0.01, 0.001, 975);
 INSERT INTO `Crop` VALUES (15, 2, '2022-12-08', 5, 4000, 3, 'Соняшник', 'Олійка', 'Задовільно', 0.01, 0.001, 0.005, 800);
-INSERT INTO `Crop` VALUES (16, 3, '2023-01-09', 3, 235, 3, 'Овес', 'Ірен', 'Добре', 0.14, 0.01, 0.0005, 900);
-INSERT INTO `Crop` VALUES (17, 3, '2023-02-10', 3, 84, 3, 'Соя', 'Сія', 'Добре', 0.13, 0.01, 0.001, 960);
+INSERT INTO `Crop` VALUES (16, 3, '2023-01-09', 3, 235, 3, 'Овес', 'Ірен', 'Задовільно', 0.14, 0.01, 0.0005, 900);
+INSERT INTO `Crop` VALUES (17, 3, '2023-02-10', 3, 0, 3, 'Соя', 'Сія', 'Добре', 0.13, 0.01, 0.001, 960);
 INSERT INTO `Crop` VALUES (18, 1, '2023-02-07', 5, 3015, 1, 'Пшениця', 'Зернятко', 'Добре', 0.11, 0.01, 0.001, 888);
 
 -- ----------------------------
@@ -108,7 +108,7 @@ CREATE TABLE `Standard`  (
   `max_nature` float NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of Standard
@@ -127,7 +127,7 @@ CREATE TABLE `Supplier`  (
   `number` varchar(16) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of Supplier
@@ -147,7 +147,7 @@ CREATE TABLE `Warehouse`  (
   `capacity` decimal(10, 0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idWarehouse_UNIQUE`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of Warehouse

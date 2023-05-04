@@ -32,7 +32,7 @@ if (!empty($_POST)){
         $successHandler = new StreamHandler(__DIR__.'/logs/login-success.log', Logger::INFO);
         $logger->pushHandler($successHandler);
         $logger->info('Користувач успішно увійшов в систему.');
-        header("location: /index.php");
+        header("location: /");
         die();
 
     } else {
